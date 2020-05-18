@@ -1,5 +1,9 @@
 require 'sinatra'
+<<<<<<< HEAD
 require './space'
+=======
+require './lib/booking'
+>>>>>>> master
 
 class SpacedOut < Sinatra::Base
   use Rack::Session::Pool
@@ -8,6 +12,7 @@ class SpacedOut < Sinatra::Base
     'hello spaced out team'
   end
 
+<<<<<<< HEAD
   get '/spaces/new' do
     erb:'spaces/new'
   end
@@ -24,3 +29,27 @@ class SpacedOut < Sinatra::Base
   end
 
 end
+=======
+  get '/spaces/1' do
+    Booking.create
+    erb :'booking'
+  end
+
+  post '/spaces/1' do
+    @day = params[:day]
+    @month = params[:month]
+    @year = params[:year]
+    @date = @day + " - " + @month + " - " + @year
+
+    @booking = Booking.instance
+    @booking.submit_request("Mars", @date)
+
+    redirect '/requests'
+  end
+
+  get '/requests' do
+    @booking = Booking.instance
+    erb :'requests'
+  end
+end
+>>>>>>> master
