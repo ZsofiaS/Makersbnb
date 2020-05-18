@@ -38,12 +38,40 @@
           null
         ]
       },
+      "/Users/garethwoodman/Desktop/Makers Academy/Projects/Makersbnb/spec/units/booking_spec.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          1,
+          1,
+          1,
+          1,
+          null,
+          null
+        ]
+      },
+      "/Users/garethwoodman/Desktop/Makers Academy/Projects/Makersbnb/lib/booking.rb": {
+        "lines": [
+          1,
+          1,
+          null,
+          1,
+          1,
+          null,
+          null,
+          1,
+          1,
+          null,
+          null
+        ]
+      },
       "/Users/garethwoodman/Desktop/Makers Academy/Projects/Makersbnb/spec/units/testing_framework_spec.rb": {
         "lines": [
 
         ]
       }
     },
-    "timestamp": 1589810372
+    "timestamp": 1589810854
   }
 }
