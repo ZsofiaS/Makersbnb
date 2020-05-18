@@ -8,6 +8,7 @@ describe Booking do
   before(:each) do
     subject.submit_request(space, date)
   end
+
   it "creates booking for space" do
     expect(subject.space).to eq space
   end
