@@ -1,7 +1,7 @@
 {
   "RSpec": {
     "coverage": {
-      "/Users/joanneyoung/Makersbnb/app.rb": {
+      "/Users/student/Documents/Makersbnb/app.rb": {
         "lines": [
           1,
           1,
@@ -31,8 +31,10 @@
           null
         ]
       },
-      "/Users/joanneyoung/Makersbnb/space.rb": {
+      "/Users/student/Documents/Makersbnb/space.rb": {
         "lines": [
+          1,
+          null,
           1,
           null,
           1,
@@ -41,10 +43,14 @@
           3,
           null,
           null,
+          1,
+          3,
+          null,
+          null,
           null
         ]
       },
-      "/Users/joanneyoung/Makersbnb/spec/features/capybara_framework_spec.rb": {
+      "/Users/student/Documents/Makersbnb/spec/features/capybara_framework_spec.rb": {
         "lines": [
           1,
           1,
@@ -54,7 +60,7 @@
           null
         ]
       },
-      "/Users/joanneyoung/Makersbnb/spec/features/new_space_spec.rb": {
+      "/Users/student/Documents/Makersbnb/spec/features/new_space_spec.rb": {
         "lines": [
           1,
           1,
@@ -66,7 +72,7 @@
           null
         ]
       },
-      "/Users/joanneyoung/Makersbnb/spec/units/space_spec.rb": {
+      "/Users/student/Documents/Makersbnb/spec/units/space_spec.rb": {
         "lines": [
           1,
           null,
@@ -83,15 +89,21 @@
           1,
           null,
           null,
+          null,
+          1,
+          1,
+          1,
+          null,
+          null,
           null
         ]
       },
-      "/Users/joanneyoung/Makersbnb/spec/units/testing_framework_spec.rb": {
+      "/Users/student/Documents/Makersbnb/spec/units/testing_framework_spec.rb": {
         "lines": [
 
         ]
       }
     },
-    "timestamp": 1589812938
+    "timestamp": 1589813427
   }
 }

@@ -1,1 +1,3 @@
-<%= @newspace.name %>
+<% @spaces.each do |space| %>
+  <%= space.name %>
+<% end %>

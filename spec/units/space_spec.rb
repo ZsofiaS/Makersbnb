@@ -13,4 +13,10 @@ describe Space do
       expect(subject.name).to eq('test space title')
     end
   end
+
+  describe '.all' do
+    it 'should be an array' do
+      expect(described_class.all).to be_a_kind_of(Array)
+    end
+  end
 end

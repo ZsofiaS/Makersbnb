@@ -14,12 +14,12 @@ class SpacedOut < Sinatra::Base
 
   post '/spaces/new' do
     @newspace = Space.new(params[:name]) 
-    session[:space] = @newspace
+    Space.all.push(@newspace)
     redirect('/spaces')
   end
 
   get '/spaces' do
-    @newspace = session[:space] 
+    @spaces = Space.all
     erb:'spaces/index'
   end
 
