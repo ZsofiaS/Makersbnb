@@ -1,0 +1,35 @@
+{
+  "RSpec": {
+    "coverage": {
+      "/Users/student/Documents/Makersbnb/app.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          1,
+          null,
+          1,
+          1,
+          null,
+          null
+        ]
+      },
+      "/Users/student/Documents/Makersbnb/spec/features/capybara_framework_spec.rb": {
+        "lines": [
+          1,
+          1,
+          1,
+          1,
+          null,
+          null
+        ]
+      },
+      "/Users/student/Documents/Makersbnb/spec/units/testing_framework_spec.rb": {
+        "lines": [
+
+        ]
+      }
+    },
+    "timestamp": 1589808111
+  }
+}
