@@ -10,4 +10,12 @@ class Booking
     @space = space
     @date = date
   end
+
+  def self.create
+    @booking = Booking.new()
+  end
+
+  def self.instance
+    @booking
+  end
 end

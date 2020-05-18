@@ -4,7 +4,7 @@ describe Booking do
 
   let(:space) { "Mars" }
   let(:date) { '02-Jun-2020'}
-  
+
   before(:each) do
     subject.submit_request(space, date)
   end
@@ -14,5 +14,10 @@ describe Booking do
 
   it 'has a date' do
     expect(subject.date).to eq date
+  end
+
+  it 'has an instance' do
+    Booking.create
+    expect(Booking.instance).to be_a Booking
   end
 end
