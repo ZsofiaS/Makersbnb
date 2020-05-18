@@ -23,6 +23,7 @@ As a user
 So that I can protect my acount
 I want to be able to sign out
 
+
 As a host
 So that I can list a space
 I want to be able to add a space on the spaces /new page
@@ -142,7 +143,7 @@ Objects
 
 Name
 
-
+something
 
 
 
@@ -169,4 +170,4 @@ Calendar
 
 
 
-testing 
+
