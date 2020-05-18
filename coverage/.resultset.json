@@ -1,7 +1,7 @@
 {
   "RSpec": {
     "coverage": {
-      "/Users/student/Documents/Makersbnb/app.rb": {
+      "/Users/student/Desktop/Github/Week-6-Challenges/Makersbnb/app.rb": {
         "lines": [
           1,
           null,
@@ -14,7 +14,7 @@
           null
         ]
       },
-      "/Users/student/Documents/Makersbnb/spec/features/capybara_framework_spec.rb": {
+      "/Users/student/Desktop/Github/Week-6-Challenges/Makersbnb/spec/features/capybara_framework_spec.rb": {
         "lines": [
           1,
           1,
@@ -24,12 +24,59 @@
           null
         ]
       },
-      "/Users/student/Documents/Makersbnb/spec/units/testing_framework_spec.rb": {
+      "/Users/student/Desktop/Github/Week-6-Challenges/Makersbnb/spec/units/testing_framework_spec.rb": {
         "lines": [
 
         ]
+      },
+      "/Users/student/Desktop/Github/Week-6-Challenges/Makersbnb/spec/units/user_spec.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          null,
+          1,
+          1,
+          null,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          null,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "/Users/student/Desktop/Github/Week-6-Challenges/Makersbnb/lib/user.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          null,
+          1,
+          2,
+          2,
+          2,
+          2,
+          2,
+          null,
+          null
+        ]
       }
     },
-    "timestamp": 1589808111
+    "timestamp": 1589814001
   }
 }
