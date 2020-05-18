@@ -1,7 +1,7 @@
 {
   "RSpec": {
     "coverage": {
-      "/Users/student/Documents/Makersbnb/app.rb": {
+      "/Users/garethwoodman/Desktop/Makers Academy/Projects/Makersbnb/app.rb": {
         "lines": [
           1,
           null,
@@ -11,10 +11,14 @@
           1,
           1,
           null,
+          null,
+          1,
+          1,
+          null,
           null
         ]
       },
-      "/Users/student/Documents/Makersbnb/spec/features/capybara_framework_spec.rb": {
+      "/Users/garethwoodman/Desktop/Makers Academy/Projects/Makersbnb/spec/features/capybara_framework_spec.rb": {
         "lines": [
           1,
           1,
@@ -24,12 +28,22 @@
           null
         ]
       },
-      "/Users/student/Documents/Makersbnb/spec/units/testing_framework_spec.rb": {
+      "/Users/garethwoodman/Desktop/Makers Academy/Projects/Makersbnb/spec/features/make_a_booking_spec.rb": {
+        "lines": [
+          1,
+          1,
+          1,
+          1,
+          null,
+          null
+        ]
+      },
+      "/Users/garethwoodman/Desktop/Makers Academy/Projects/Makersbnb/spec/units/testing_framework_spec.rb": {
         "lines": [
 
         ]
       }
     },
-    "timestamp": 1589808111
+    "timestamp": 1589810372
   }
 }

@@ -6,4 +6,8 @@ class SpacedOut < Sinatra::Base
   get '/' do
     'hello spaced out team'
   end
+
+  get '/spaces/1' do
+    'Request booking'
+  end
 end
