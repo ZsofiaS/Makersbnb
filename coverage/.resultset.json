@@ -1,7 +1,7 @@
 {
   "RSpec": {
     "coverage": {
-      "/Users/garethwoodman/Desktop/Makers Academy/Projects/Makersbnb/app.rb": {
+      "/Users/student/Documents/Makers projects/Week_6/Makersbnb/app.rb": {
         "lines": [
           1,
           null,
@@ -13,12 +13,13 @@
           null,
           null,
           1,
-          1,
+          null,
+          2,
           null,
           null
         ]
       },
-      "/Users/garethwoodman/Desktop/Makers Academy/Projects/Makersbnb/spec/features/capybara_framework_spec.rb": {
+      "/Users/student/Documents/Makers projects/Week_6/Makersbnb/spec/features/capybara_framework_spec.rb": {
         "lines": [
           1,
           1,
@@ -28,50 +29,67 @@
           null
         ]
       },
-      "/Users/garethwoodman/Desktop/Makers Academy/Projects/Makersbnb/spec/features/make_a_booking_spec.rb": {
+      "/Users/student/Documents/Makers projects/Week_6/Makersbnb/spec/features/make_a_booking_spec.rb": {
         "lines": [
           1,
           1,
           1,
           1,
           null,
+          null,
+          1,
+          1,
+          1,
+          null,
+          null,
           null
         ]
       },
-      "/Users/garethwoodman/Desktop/Makers Academy/Projects/Makersbnb/spec/units/booking_spec.rb": {
+      "/Users/student/Documents/Makers projects/Week_6/Makersbnb/spec/units/booking_spec.rb": {
         "lines": [
           1,
           null,
           1,
+          null,
+          3,
+          3,
+          null,
+          1,
+          2,
+          null,
           1,
           1,
+          null,
+          null,
           1,
           1,
           null,
           null
         ]
       },
-      "/Users/garethwoodman/Desktop/Makers Academy/Projects/Makersbnb/lib/booking.rb": {
+      "/Users/student/Documents/Makers projects/Week_6/Makersbnb/lib/booking.rb": {
         "lines": [
           1,
           1,
           null,
           1,
-          1,
+          2,
+          2,
           null,
           null,
           1,
-          1,
+          2,
+          2,
           null,
           null
         ]
       },
-      "/Users/garethwoodman/Desktop/Makers Academy/Projects/Makersbnb/spec/units/testing_framework_spec.rb": {
+      "/Users/student/Documents/Makers projects/Week_6/Makersbnb/spec/units/testing_framework_spec.rb": {
         "lines": [
 
         ]
       }
     },
-    "timestamp": 1589810854
+    "timestamp": 1589812516
   }
 }

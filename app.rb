@@ -8,6 +8,7 @@ class SpacedOut < Sinatra::Base
   end
 
   get '/spaces/1' do
-    'Request booking'
+    
+    erb :'booking'
   end
 end
