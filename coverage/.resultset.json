@@ -14,7 +14,7 @@
           null,
           1,
           null,
-          2,
+          3,
           null,
           null
         ]
@@ -32,6 +32,11 @@
       "/Users/student/Documents/Makers projects/Week_6/Makersbnb/spec/features/make_a_booking_spec.rb": {
         "lines": [
           1,
+          1,
+          1,
+          1,
+          null,
+          null,
           1,
           1,
           1,
@@ -90,6 +95,6 @@
         ]
       }
     },
-    "timestamp": 1589812516
+    "timestamp": 1589812702
   }
 }

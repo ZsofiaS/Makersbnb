@@ -9,4 +9,9 @@ feature "Making a booking" do
     expect(page).to have_select('month')
   end
 
+  scenario 'User can select dates' do
+    visit('/spaces/1')
+    expect(page).to have_select('year')
+  end
+
 end
