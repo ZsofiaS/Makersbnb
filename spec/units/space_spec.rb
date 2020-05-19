@@ -1,11 +1,10 @@
 require 'space'
 
 describe Space do
-  let(:moneyInstance) { double() }
-  let(:moneyClass) { double(new: moneyInstance) }
+  let(:price_per_night) { double() }
   let(:available_from) { double() }
   let(:available_to) { double() }
-  let(:subject) { described_class.new(moneyClass, 'test space title', 'test description', 1000, available_from, available_to) }
+  let(:subject) { described_class.new('test space title', 'test description', price_per_night, available_from, available_to) }
 
   describe '#name' do
     it 'should be a string' do
@@ -29,13 +28,13 @@ describe Space do
 
   describe '#price_per_night' do
     it 'should be an instance of Money' do
-      expect(subject.price_per_night).to be_a_kind_of(moneyInstance.class)
+      expect(subject.price_per_night).to eq(price_per_night)
     end
   end
 
   describe '#price_per_night_formatted' do
     it 'it calls the format method on price per night' do
-      expect(moneyInstance).to receive(:format)
+      expect(price_per_night).to receive(:format)
       subject.price_per_night_formatted
     end
   end
