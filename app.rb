@@ -1,6 +1,8 @@
 require 'sinatra'
-require './space'
+require './lib/space'
 require './lib/booking'
+require 'money'
+require './currency_config.rb'
 require './database_connection_setup'
 
 class SpacedOut < Sinatra::Base
@@ -10,12 +12,32 @@ class SpacedOut < Sinatra::Base
     'hello spaced out team'
   end
 
+  get '/users/new' do
+    erb :'users/new'
+  end
+
+  get '/users/log-in' do
+    erb :'users/login'
+  end
+
+  post '/users/log-in' do
+    erb :'users/login'
+  end
+
+  post '/users/redirectlogin' do
+    'Welcome, test'
+    redirect('/spaces')
+  end
+
   get '/spaces/new' do
-    erb:'spaces/new'
+    erb :'spaces/new'
   end
 
   post '/spaces/new' do
-    @newspace = Space.new(params[:name])
+    @newspace = Space.new(Money, 
+    params[:name], 
+    params[:description],
+    NumberConverter.two_decimal_place_float_to_int(params[:price_per_night].to_f))
     Space.all.push(@newspace)
     redirect('/spaces')
   end
