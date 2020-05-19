@@ -1,13 +1,14 @@
 class Space
 
-  attr_reader :name, :description, :price_per_night
+  attr_reader :name, :description, :price_per_night, :available_from
 
   @@spaces = []
 
-  def initialize(moneyClass, name, description, price_per_night)
+  def initialize(moneyClass, name, description, price_per_night, available_from)
     @name = name
     @description = description
     @price_per_night = moneyClass.new(price_per_night)
+    @available_from = available_from
   end
 
   def price_per_night_formatted

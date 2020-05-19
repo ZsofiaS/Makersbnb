@@ -3,7 +3,8 @@ require 'space'
 describe Space do
   let(:moneyInstance) { double() }
   let(:moneyClass) { double(new: moneyInstance) }
-  let(:subject) { described_class.new(moneyClass, 'test space title', 'test description', 1000) }
+  let(:available_from) { double() }
+  let(:subject) { described_class.new(moneyClass, 'test space title', 'test description', 1000, available_from) }
 
   describe '#name' do
     it 'should be a string' do
@@ -35,6 +36,12 @@ describe Space do
     it 'it calls the format method on price per night' do
       expect(moneyInstance).to receive(:format)
       subject.price_per_night_formatted
+    end
+  end
+
+  describe '#available_from' do
+    it 'should be a date' do
+      expect(subject.available_from).to eq(available_from)
     end
   end
 
