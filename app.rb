@@ -67,6 +67,8 @@ class SpacedOut < Sinatra::Base
     p "print params all"
     p params[:id]
     @booking = Booking.find(user_id: params[:id])
+    p "find booking"
+    p @booking
     erb :'bookings/requests'
   end
 
