@@ -1,6 +1,7 @@
 require 'sinatra'
 require './space'
 require './lib/booking'
+require './database_connection_setup'
 
 class SpacedOut < Sinatra::Base
   use Rack::Session::Pool
