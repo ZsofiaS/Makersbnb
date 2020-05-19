@@ -1,6 +1,8 @@
 require 'sinatra'
 require './lib/space'
 require './lib/booking'
+require 'money'
+require './currency_config.rb'
 
 class SpacedOut < Sinatra::Base
   use Rack::Session::Pool
@@ -31,7 +33,10 @@ class SpacedOut < Sinatra::Base
   end
 
   post '/spaces/new' do
-    @newspace = Space.new(params[:name], params[:description])
+    @newspace = Space.new(Money, 
+    params[:name], 
+    params[:description],
+    NumberConverter.two_decimal_place_float_to_int(params[:price_per_night].to_f))
     Space.all.push(@newspace)
     redirect('/spaces')
   end
