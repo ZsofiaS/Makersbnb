@@ -1,3 +1,7 @@
 <% @spaces.each do |space| %>
   <%= space.name %>
+  <%= space.description %>
+  <%= space.price_per_night_formatted %>
+  <%= space.available_from.strftime("%d-%m-%Y") %>
+  <%= space.available_to.strftime("%d-%m-%Y") %>
 <% end %>

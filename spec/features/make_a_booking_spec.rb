@@ -20,6 +20,6 @@ feature "Making a booking" do
     select("May", :from => "month")
     select("2021", :from => "year")
     click_button 'Request booking'
-    expect(page).to have_content("1 - May - 2021")
+    expect(page).to have_content("2021")
   end
 end

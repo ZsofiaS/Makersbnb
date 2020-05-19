@@ -1,6 +1,5 @@
 require 'simplecov'
 require 'simplecov-console'
-require_relative './web_helper'
 SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter.new([
   SimpleCov::Formatter::Console,
   # Want a nice code coverage website? Uncomment this next line!
@@ -24,11 +23,11 @@ require 'rspec'
 # Tell Capybara to talk to BookmarkManager
 Capybara.app = SpacedOut
 
-# require './setup_test_database.rb'
+require_relative './setup_test_database.rb'
 
 RSpec.configure do |config|
   config.before(:each) do
-    set_up_user_test_database
+    setup_test_database
   end
 end
 
