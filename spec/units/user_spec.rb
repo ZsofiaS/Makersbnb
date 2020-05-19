@@ -2,24 +2,26 @@ require 'user'
 require 'pg'
 
 describe User do
+
+  user = User.new('patrick', '12345')
+
   describe 'variables' do
     it 'initialises the variables when login user' do
-      expect(subject).to respond_to(:username)
-      expect(subject).to respond_to(:password)
-      expect(subject).to respond_to(:realname)
-      expect(subject).to respond_to(:email)
-      expect(subject).to respond_to(:id)
+      expect(user.username).to eq('patrick')
+      expect(user.password).to eq('12345')
+      expect(user).to respond_to(:realname)
+      expect(user).to respond_to(:email)
+      expect(user).to respond_to(:id)
     end
   end
 
   describe 'create' do 
     it 'saves user in database' do 
-      User.create('patrick', 'patrick sawyer', 'pat@test.com', '12345')
-      user = User.new('patrick', '123245')
+      User.create('patrick', 'patrick sawyer', 'pat@test.com', '12345') #saves to database
+      user.get_user_data # gets data from database
       expect(user.email).to eq ('pat@test.com')
-      expect(user.password).to eq ('12345')
-      expect(user.username).to eq ('patrick')
       expect(user.realname).to eq ('patrick sawyer')
+      # expect(user.id).to be_a('Number')
     end
   end
 end
