@@ -1,5 +1,5 @@
 require 'sinatra'
-require './space'
+require './lib/space'
 require './lib/booking'
 
 class SpacedOut < Sinatra::Base
@@ -9,8 +9,25 @@ class SpacedOut < Sinatra::Base
     'hello spaced out team'
   end
 
+  get '/users/new' do
+    erb :'users/new'
+  end
+
+  get '/users/log-in' do
+    erb :'users/login'
+  end
+
+  post '/users/log-in' do
+    erb :'users/login'
+  end
+
+  post '/users/redirectlogin' do
+    'Welcome, test'
+    redirect('/spaces')
+  end
+
   get '/spaces/new' do
-    erb:'spaces/new'
+    erb :'spaces/new'
   end
 
   post '/spaces/new' do
