@@ -1,6 +1,6 @@
  <h1>Please log in</h1>
  <p><%=session[:username]%><%=session[:password]%></p>
-<form action='/users/redirectlogin' method='post'>
+<form action='/users/log-in' method='post'>
   <input type='text' name='username' placeholder='username'>
   <br>
   <input type='password' name='password' placeholder='password'>

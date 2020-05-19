@@ -15,19 +15,18 @@ class SpacedOut < Sinatra::Base
   end
 
   post '/users/new' do
-    # session[:username] = params[:username]
-    # session[:password] = params[:password]
     User.create(params[:username], params[:name], params[:email], params[:password])
-    erb :'users/login'
+    redirect '/users/log-in'
   end
 
   get '/users/log-in' do
     erb :'users/login'
   end
 
-  post '/users/redirectlogin' do
+  post '/users/log-in' do
     'Welcome, test'
-    # user = User.new(username, password)
+    session[:user] = User.new(params[:username], params[:password])
+    session[:user].get_user_data
     redirect('/spaces')
   end
 
