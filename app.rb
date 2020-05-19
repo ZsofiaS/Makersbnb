@@ -25,17 +25,17 @@ class SpacedOut < Sinatra::Base
   end
 
   get '/spaces/1' do
-    Booking.create
     erb :'booking'
   end
 
   post '/spaces/1' do
-    @day = params[:day]
-    @month = params[:month]
-    @year = params[:year]
-    @date = @day + " - " + @month + " - " + @year
+    # Place holders ----
+    @space_id = 1
+    @user_id = 1
+    # -----------------
+    @date = params[:day] + " - " + params[:month] + " - " + params[:year]
 
-    @booking = Booking.instance
+    @booking = Booking.create(@space_id, @user_id, @date)
     @booking.submit_request("Mars", @date)
 
     redirect '/requests'
