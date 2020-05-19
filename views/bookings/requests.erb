@@ -1,0 +1,12 @@
+<h1>Request I've made</h1>
+
+<p>User ID: <%= @booking.user_id %></p>
+<p>Date booked: <%= @booking.print_date %></p>
+<p>Space ID: <%= @booking.space_id %></p>
+<p>Status: <%= @booking.status %></p>
+
+<form class="" action="/spaces/<%= @booking.id %>" method="get">
+  <input type="submit" name="" value="Show the space">
+</form>
+
+<h1>Requests I received</h1>

@@ -14,6 +14,20 @@ feature "Making a booking" do
     expect(page).to have_select('year')
   end
 
+  scenario 'can go back to the space page from requests' do
+    visit('/requests')
+    click_button('Show the space')
+    expect(page).to have_content('Request booking')
+  end
+
+  before(:each) do
+    visit('/spaces/1')
+    select("1", :from => "day")
+    select("May", :from => "month")
+    select("2021", :from => "year")
+    click_button 'Request booking'
+  end
+
   scenario 'Dates are submitted' do
     visit('/spaces/1')
     select("1", :from => "day")
@@ -22,4 +36,9 @@ feature "Making a booking" do
     click_button 'Request booking'
     expect(page).to have_content("2021")
   end
+
+  scenario 'Booking information displayed' do
+    expect(page).to have_content('unconfirmed')
+  end
+
 end
