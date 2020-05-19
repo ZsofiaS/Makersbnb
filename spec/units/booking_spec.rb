@@ -2,6 +2,7 @@ require 'booking'
 
 describe Booking do
 
+
   let(:subject) { Booking.create(space_id: 1, user_id: 1, date: Time.new)}
 
   describe '.create' do

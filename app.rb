@@ -34,8 +34,8 @@ class SpacedOut < Sinatra::Base
   end
 
   post '/spaces/new' do
-    @newspace = Space.new(Money, 
-    params[:name], 
+    @newspace = Space.new(Money,
+    params[:name],
     params[:description],
     NumberConverter.two_decimal_place_float_to_int(params[:price_per_night].to_f))
     Space.all.push(@newspace)
@@ -57,13 +57,9 @@ class SpacedOut < Sinatra::Base
     @user_id = 1
     # -----------------
     @date = Time.new(params[:year], params[:month], params[:day])
-
-    p @date
-
     @booking = Booking.create(space_id: @space_id, user_id: @user_id, date: @date)
     session[:booking_id] = @booking.id
 
-    p @booking
     redirect '/requests'
   end
 
