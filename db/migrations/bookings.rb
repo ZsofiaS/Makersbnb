@@ -1,5 +1,5 @@
 CREATE TABLE bookings(id SERIAL PRIMARY KEY,
-date TIMESTAMP,
+date DATE,
 space_id INTEGER,
 user_id INTEGER,
 status VARCHAR(20));
