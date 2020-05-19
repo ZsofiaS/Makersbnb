@@ -1,6 +1,7 @@
 require 'sinatra'
 require './lib/space'
 require './lib/booking'
+require './lib/user'
 
 class SpacedOut < Sinatra::Base
   use Rack::Session::Pool
@@ -13,16 +14,20 @@ class SpacedOut < Sinatra::Base
     erb :'users/new'
   end
 
-  get '/users/log-in' do
+  post '/users/new' do
+    # session[:username] = params[:username]
+    # session[:password] = params[:password]
+    User.create(params[:username], params[:name], params[:email], params[:password])
     erb :'users/login'
   end
 
-  post '/users/log-in' do
+  get '/users/log-in' do
     erb :'users/login'
   end
 
   post '/users/redirectlogin' do
     'Welcome, test'
+    # user = User.new(username, password)
     redirect('/spaces')
   end
 

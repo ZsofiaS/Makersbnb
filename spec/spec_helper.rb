@@ -1,5 +1,6 @@
 require 'simplecov'
 require 'simplecov-console'
+require_relative './web_helper'
 SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter.new([
   SimpleCov::Formatter::Console,
   # Want a nice code coverage website? Uncomment this next line!
@@ -25,11 +26,11 @@ Capybara.app = SpacedOut
 
 # require './setup_test_database.rb'
 
-# RSpec.configure do |config|
-#   config.before(:each) do
-#     setup_test_database
-#   end
-# end
+RSpec.configure do |config|
+  config.before(:each) do
+    set_up_user_test_database
+  end
+end
 
 RSpec.configure do |config|
   # rspec-expectations config goes here. You can use an alternate

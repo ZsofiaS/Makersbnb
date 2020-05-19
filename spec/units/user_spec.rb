@@ -1,24 +1,25 @@
 require 'user'
+require 'pg'
 
-describe 'User' do
-
-  login_user = User.new('tanil', '12345');
-  signup_user = User.new('patrick', '12345', 'patrick sawyer', 'patrick@hotmail.co.uk')
-
+describe User do
   describe 'variables' do
     it 'initialises the variables when login user' do
-      expect(login_user.username).to eq ('tanil')
-      expect(login_user.password).to eq ('12345')
-      expect(login_user).to respond_to(:realname)
-      expect(login_user).to respond_to(:email)
-      expect(login_user).to respond_to(:id)
+      expect(subject).to respond_to(:username)
+      expect(subject).to respond_to(:password)
+      expect(subject).to respond_to(:realname)
+      expect(subject).to respond_to(:email)
+      expect(subject).to respond_to(:id)
     end
-    it 'initialises variables when signup_user' do 
-      expect(signup_user.username).to eq ('patrick')
-      expect(signup_user.password).to eq ('12345')
-      expect(signup_user.email).to eq ('patrick@hotmail.co.uk')
-      expect(signup_user.realname).to eq ('patrick sawyer')
-      expect(login_user).to respond_to(:id)
+  end
+
+  describe 'create' do 
+    it 'saves user in database' do 
+      User.create('patrick', 'patrick sawyer', 'pat@test.com', '12345')
+      user = User.new('patrick', '123245')
+      expect(user.email).to eq ('pat@test.com')
+      expect(user.password).to eq ('12345')
+      expect(user.username).to eq ('patrick')
+      expect(user.realname).to eq ('patrick sawyer')
     end
   end
 end
