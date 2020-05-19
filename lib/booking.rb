@@ -3,7 +3,7 @@ require 'date'
 require_relative 'database_connection'
 
 class Booking
-  attr_reader :id, :space_id, :user_id, :status, :date
+  attr_reader :id, :space_id, :user_id, :status
 
   def initialize(id:, space_id:, user_id:, date:, status:)
     @id = id
@@ -15,7 +15,6 @@ class Booking
   end
 
   def print_date
-    p @date
     @date.strftime('%d - %b - %Y')
   end
 
@@ -39,6 +38,8 @@ class Booking
                  date: result[0]['date'],
                status: result[0]['status'])
   end
+
+  private_class_method :instance
 end
 
 # def self.all
