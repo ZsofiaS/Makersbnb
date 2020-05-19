@@ -7,6 +7,9 @@ feature 'registration' do
     fill_in('password', with: '12345')
     click_button('submit')
     expect(page).to have_content 'Please log in'
+    # expect(page).to have_content 'test'
+    # expect(page).to have_content '12345'
+
   end
   scenario ' a user can log in' do
     visit('/users/log-in')
@@ -15,6 +18,7 @@ feature 'registration' do
     click_button('submit')
     expect(page).to have_current_path("/spaces", url: false)
   end
+
 end
 
 

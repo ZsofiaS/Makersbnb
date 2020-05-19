@@ -6,5 +6,5 @@ def setup_test_database
   connection = PG.connect(dbname: 'spaced_out_test')
 
   # Clear the bookmarks table
-  connection.exec("TRUNCATE bookings;")
+  connection.exec("TRUNCATE bookings, users;")
 end

@@ -1,7 +1,9 @@
 require 'sinatra'
+require 'money'
 require './lib/space'
 require './lib/booking'
-require 'money'
+require './lib/user'
+require './lib/number_converter'
 require './currency_config.rb'
 require './database_connection_setup'
 
@@ -16,16 +18,21 @@ class SpacedOut < Sinatra::Base
     erb :'users/new'
   end
 
+  post '/users/new' do
+    session[:username] = params[:username]
+    session[:password] = params[:password]
+    User.create(params[:username], params[:name], params[:email], params[:password])
+    redirect '/users/log-in'
+  end
+
   get '/users/log-in' do
     erb :'users/login'
   end
 
   post '/users/log-in' do
-    erb :'users/login'
-  end
-
-  post '/users/redirectlogin' do
     'Welcome, test'
+    session[:user] = User.new(params[:username], params[:password])
+    session[:user].get_user_data
     redirect('/spaces')
   end
 
@@ -34,10 +41,13 @@ class SpacedOut < Sinatra::Base
   end
 
   post '/spaces/new' do
-    @newspace = Space.new(Money,
-    params[:name],
-    params[:description],
-    NumberConverter.two_decimal_place_float_to_int(params[:price_per_night].to_f))
+    @newspace = Space.new(
+      params[:name],
+      params[:description],
+      Money.new(NumberConverter.two_decimal_place_float_to_int(params[:price_per_night].to_f)),
+      Date.parse(params[:available_from]),
+      Date.parse(params[:available_to])
+    )
     Space.all.push(@newspace)
     redirect('/spaces')
   end
