@@ -34,15 +34,19 @@ class SpacedOut < Sinatra::Base
     @space_id = 1
     @user_id = 1
     # -----------------
-    @date = params[:day] + " - " + params[:month] + " - " + params[:year]
+    @date = Time.new(params[:year], params[:month], params[:day])
+
+    p @date
 
     @booking = Booking.create(space_id: @space_id, user_id: @user_id, date: @date)
+    session[:booking_id] = @booking.id
 
+    p @booking
     redirect '/requests'
   end
 
   get '/requests' do
-    @booking = Booking.find(id: 1)
+    @booking = Booking.find(id: session[:booking_id])
     erb :'requests'
   end
 end

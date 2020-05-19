@@ -1,4 +1,5 @@
 require 'pg'
+require 'date'
 require_relative 'database_connection'
 
 class Booking
@@ -8,9 +9,14 @@ class Booking
     @id = id
     @space_id = space_id
     @user_id = user_id
-    @date = date
+    @date = DateTime.parse(date)
     @status = status
 
+  end
+
+  def print_date
+    p @date
+    @date.strftime('%d - %b - %Y')
   end
 
   def self.create(space_id:, user_id:, date:)

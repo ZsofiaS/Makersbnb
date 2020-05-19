@@ -4,18 +4,11 @@ describe Booking do
 
   let(:subject) { Booking.create(space_id: 1, user_id: 1, date: Time.new)}
 
-  # let(:space) { "Mars" }
-  # let(:date) { '02-Jun-2020'}
-
-  # before(:each) do
-  #   subject = Booking.create
-  # end
-
   describe '.create' do
     it "creates booking for space" do
       expect(subject).to be_a Booking
-      expect(subject.space_id).to eq(1)
-      expect(subject.user_id).to eq(1)
+      expect(subject.space_id).to eq("1")
+      expect(subject.user_id).to eq("1")
     end
   end
 
