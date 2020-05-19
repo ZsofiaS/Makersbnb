@@ -1,12 +1,21 @@
-Any signed-up user can list a new space.
-Users can list multiple spaces.
-Users should be able to name their space, provide a short description of the space, and a price per night.
-Users should be able to offer a range of dates where their space is available.
-Any signed-up user can request to hire any space for one night, and this should be approved by the user that owns that space.
-Nights for which a space has already been booked should not be available for users to book that space.
+# Spaced Out
+
+Air B'n'B on an INTERGALACTIC scale. Our users take advantage of our state of the art web app to book short term accomodation in locations around the universe. From Saturn to Pluto, from the centre of the Andromeda nebula to the ends of the Milky Way, Spaced Out is where its at for your non-terrestrial travel needs!
+
+## Spec
+
+- Any signed-up user can list a new space.
+- Users can list multiple spaces.
+- Users should be able to name their space, provide a short description of the space, and a price per night.
+- Users should be able to offer a range of dates where their space is available.
+- Any signed-up user can request to hire any space for one night, and this should be approved by the user - that owns that space.
+- Nights for which a space has already been booked should not be available for users to book that space.
 Until a user has confirmed a booking request, that space can still be booked for that night.
 
+## User Stories
 
+### User Account
+```
 As a user
 So that I list a space
 I want to sign up to the website
@@ -22,8 +31,10 @@ I want to be able to sign in
 As a user
 So that I can protect my acount
 I want to be able to sign out
+```
 
-
+### Listing Spaces
+```
 As a host
 So that I can list a space
 I want to be able to add a space on the spaces /new page
@@ -55,7 +66,10 @@ I want to be able to accept or reject bookings
 As a host
 So that I can efficiently reject bookings
 I want them to be auto rejected when I accept a single request
+```
 
+### Booking Spaces
+```
 As a guest
 So that I can see the range available
 I want to be able to see a full page of listings
@@ -83,89 +97,60 @@ I want to only be able to select available dates
 As a guest
 So that I can give the host options
 I want to be able to request a date that have already been requested
+```
+
+## Database tables
+
+`users` table:
+| Field | Type |
+| --- | --- |
+| id | SERIAL PRIMARY ID |
+| name | VARCHAR(100) |
+| email | VARCHAR(200) |
+| password | VARCHAR(50) |
+| username | VARCHAR(50) |
+
+`bookings` table:
+| Field | Type |
+| --- | --- |
+| id | SERIAL PRIMARY ID |
+| date | DATETIME |
+| space_id | FOREIGN ID |
+| user_id | FOREIGN ID |
+| status | VARCHAR(20) |
+
+`spaces` table:
+| Field | Type |
+| --- | --- |
+| id | SERIAL PRIMARY ID |
+| name | VARCHAR(300) |
+| description | VARCHAR(2000) |
+| location | VARCHAR(100) |
+| available_to | DATETIME |
+| available_from | DATETIME |
+| images | URL |
 
 
+## Objects
 
+| Object | Message |
+| --- | --- |
+| User | @username |
+| |  @realname |
+| | @email |
+| | @id |
 
+| Object | Message |
+| --- | --- |
+| Booking | @space |
+| | @date |
+| | .instance |
+| | .create |
 
-
-
-
-
-
-
-
-
-
-
-
-Database tables
-
-User
-Booking
-Spaces
-Id
-Name
-Email
-Password
-Username
-Id
-Date
-Space id
-User id
-Status(unconfirmed, confirmed, rejected)
-
-
-
-Id
-User id
-Name
-Description
-Location
-Price
-Available to
-Available from
-
-
-
-
-
-
-Images
-
-
-
-
-
-
-
-Objects
-
-Name
-
-something
-
-
-
-
-Instance variables
-
-
-
-
-
-
-Methods
-
-
-
-
-
-
-
-Calendar
-
-
+| Object | Message |
+| --- | --- |
+| Space | @name |
+| | .all |
 
 
 
