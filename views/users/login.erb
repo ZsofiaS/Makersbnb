@@ -1,9 +1,8 @@
- <h1>Please log in</h1>
- <p><%=session[:username]%><%=session[:password]%></p>
+<h1>Please log in</h1>
 <form action='/users/log-in' method='post'>
-  <input type='text' name='username' placeholder='username'>
+  <input type='text' name='username' placeholder='username' value="<%=session[:username]%>">
   <br>
-  <input type='password' name='password' placeholder='password'>
+  <input type='password' name='password' placeholder='password' value="<%=session[:password]%>">
   <br>
   <input type='submit' name='submit' value='submit'>
 </form>
