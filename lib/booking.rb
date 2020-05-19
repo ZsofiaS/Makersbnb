@@ -2,17 +2,18 @@ require 'pg'
 require_relative 'database_connection'
 
 class Booking
-  attr_reader :space_id, :user_id, :status, :date
+  attr_reader :id, :space_id, :user_id, :status, :date
 
-  def initialize(space_id:, user_id:, date:, status:)
+  def initialize(id:, space_id:, user_id:, date:, status:)
+    @id = id
     @space_id = space_id
     @user_id = user_id
     @date = date
     @status = status
+
   end
 
-  def self.create(space_id, user_id, date)
-    ##@booking = Booking.new(space, user, date)
+  def self.create(space_id:, user_id:, date:)
     result = DatabaseConnection.query("INSERT INTO bookings (date, space_id, user_id, status)
                                     VALUES('#{date}', '#{space_id}', '#{user_id}', '#{'unconfirmed'}')
                                     RETURNING id, date, space_id, user_id, status;")
@@ -21,7 +22,7 @@ class Booking
              space_id: result[0]['space_id'],
               user_id: result[0]['user_id'],
                  date: result[0]['date'],
-               status: result[0]['status'],
+               status: result[0]['status'])
   end
 
   def self.instance
