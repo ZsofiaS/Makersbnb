@@ -3,6 +3,7 @@ require './lib/space'
 require './lib/booking'
 require 'money'
 require './currency_config.rb'
+require './database_connection_setup'
 
 class SpacedOut < Sinatra::Base
   use Rack::Session::Pool
@@ -47,24 +48,27 @@ class SpacedOut < Sinatra::Base
   end
 
   get '/spaces/1' do
-    Booking.create
     erb :'booking'
   end
 
   post '/spaces/1' do
-    @day = params[:day]
-    @month = params[:month]
-    @year = params[:year]
-    @date = @day + " - " + @month + " - " + @year
+    # Place holders ----
+    @space_id = 1
+    @user_id = 1
+    # -----------------
+    @date = Time.new(params[:year], params[:month], params[:day])
 
-    @booking = Booking.instance
-    @booking.submit_request("Mars", @date)
+    p @date
 
+    @booking = Booking.create(space_id: @space_id, user_id: @user_id, date: @date)
+    session[:booking_id] = @booking.id
+
+    p @booking
     redirect '/requests'
   end
 
   get '/requests' do
-    @booking = Booking.instance
+    @booking = Booking.find(id: session[:booking_id])
     erb :'requests'
   end
 end

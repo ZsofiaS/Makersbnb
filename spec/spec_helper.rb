@@ -23,13 +23,13 @@ require 'rspec'
 # Tell Capybara to talk to BookmarkManager
 Capybara.app = SpacedOut
 
-# require './setup_test_database.rb'
+require_relative './setup_test_database.rb'
 
-# RSpec.configure do |config|
-#   config.before(:each) do
-#     setup_test_database
-#   end
-# end
+RSpec.configure do |config|
+  config.before(:each) do
+    setup_test_database
+  end
+end
 
 RSpec.configure do |config|
   # rspec-expectations config goes here. You can use an alternate
