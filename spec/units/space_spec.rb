@@ -4,7 +4,8 @@ describe Space do
   let(:moneyInstance) { double() }
   let(:moneyClass) { double(new: moneyInstance) }
   let(:available_from) { double() }
-  let(:subject) { described_class.new(moneyClass, 'test space title', 'test description', 1000, available_from) }
+  let(:available_to) { double() }
+  let(:subject) { described_class.new(moneyClass, 'test space title', 'test description', 1000, available_from, available_to) }
 
   describe '#name' do
     it 'should be a string' do
@@ -40,8 +41,14 @@ describe Space do
   end
 
   describe '#available_from' do
-    it 'should be a date' do
+    it 'equals object dependency object passed in on creation' do
       expect(subject.available_from).to eq(available_from)
+    end
+  end
+
+  describe '#available_to' do
+    it 'equals object dependency object passed in on creation' do
+      expect(subject.available_to).to eq(available_to)
     end
   end
 

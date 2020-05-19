@@ -41,7 +41,8 @@ class SpacedOut < Sinatra::Base
       params[:name], 
       params[:description],
       NumberConverter.two_decimal_place_float_to_int(params[:price_per_night].to_f),
-      Date.parse(params[:available_from])
+      Date.parse(params[:available_from]),
+      Date.parse(params[:available_to])
     )
     Space.all.push(@newspace)
     redirect('/spaces')
