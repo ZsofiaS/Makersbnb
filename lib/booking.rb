@@ -18,15 +18,20 @@ class Booking
                                     VALUES('#{date}', '#{space_id}', '#{user_id}', '#{'unconfirmed'}')
                                     RETURNING id, date, space_id, user_id, status;")
 
+    instance(result)
+  end
+
+  def self.find(id:)
+    result = DatabaseConnection.query("SELECT * FROM bookings WHERE id = #{id}")
+    instance(result)
+  end
+
+  def self.instance(result)
     Booking.new(id: result[0]['id'],
              space_id: result[0]['space_id'],
               user_id: result[0]['user_id'],
                  date: result[0]['date'],
                status: result[0]['status'])
-  end
-
-  def self.instance
-    @booking
   end
 end
 
