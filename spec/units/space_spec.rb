@@ -1,8 +1,8 @@
-require_relative '../../space'
+require 'space'
 
 describe Space do
 
-  let(:subject) { described_class.new('test space title') }
+  let(:subject) { described_class.new('test space title', 'test description') }
 
   describe '#name' do
     it 'should be a string' do
@@ -11,6 +11,16 @@ describe Space do
 
     it 'has a name set when initialized' do
       expect(subject.name).to eq('test space title')
+    end
+  end
+
+  describe '#description' do
+    it 'should be a string' do
+      expect(subject.description).to be_a_kind_of(String)
+    end
+  
+    it 'has a description when initialized' do
+      expect(subject.description).to eq('test description')
     end
   end
 

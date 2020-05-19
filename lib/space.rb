@@ -1,11 +1,12 @@
 class Space
 
-  attr_reader :name
+  attr_reader :name, :description
 
   @@spaces = []
 
-  def initialize(name)
+  def initialize(name, description)
     @name = name
+    @description = description
   end
 
   def self.all

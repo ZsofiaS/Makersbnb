@@ -1,5 +1,5 @@
 require 'sinatra'
-require './space'
+require './lib/space'
 require './lib/booking'
 
 class SpacedOut < Sinatra::Base
@@ -14,7 +14,7 @@ class SpacedOut < Sinatra::Base
   end
 
   post '/spaces/new' do
-    @newspace = Space.new(params[:name])
+    @newspace = Space.new(params[:name], params[:description])
     Space.all.push(@newspace)
     redirect('/spaces')
   end
