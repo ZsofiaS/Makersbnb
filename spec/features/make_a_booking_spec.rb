@@ -15,7 +15,7 @@ feature "Making a booking" do
   end
 
   scenario 'can go back to the space page from requests' do
-    visit('/requests')
+    visit('/requests/users/1')
     click_button('Show the space')
     expect(page).to have_content('Request booking')
   end
