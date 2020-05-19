@@ -1,4 +1,4 @@
-require_relative '../../space'
+require_relative '../../lib/space'
 
 describe Space do
 
