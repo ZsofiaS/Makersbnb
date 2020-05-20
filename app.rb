@@ -53,7 +53,7 @@ class SpacedOut < Sinatra::Base
   end
 
   get '/spaces' do
-    @spaces = Space.all
+    @spaces = Space.all 
     erb:'spaces/index'
   end
 

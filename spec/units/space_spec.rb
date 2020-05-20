@@ -1,4 +1,5 @@
 require 'space'
+require 'pg'
 
 describe Space do
   let(:price_per_night) { double() }
@@ -56,4 +57,11 @@ describe Space do
       expect(described_class.all).to be_a_kind_of(Array)
     end
   end
+
+  describe '#save' do
+    it 'saves data to the spaces table' do
+      expect(subject.save).not_to be_nil
+    end
+  end
+
 end
