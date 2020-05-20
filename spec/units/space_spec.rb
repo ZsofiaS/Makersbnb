@@ -2,9 +2,9 @@ require 'space'
 require 'pg'
 
 describe Space do
-  let(:price_per_night) { double() }
-  let(:available_from) { double() }
-  let(:available_to) { double() }
+  let(:price_per_night) { double(fractional: 1000) }
+  let(:available_from) { double(strftime: '2022-10-10') }
+  let(:available_to) { double(strftime: '2025-11-16') }
   let(:subject) { described_class.new('test space title', 'test description', price_per_night, available_from, available_to) }
 
   describe '#name' do
@@ -60,6 +60,8 @@ describe Space do
 
   describe '#save' do
     it 'saves data to the spaces table' do
+      p 'HELLO HELLO HELLO'
+      p subject.price_per_night.fractional
       expect(subject.save).not_to be_nil
     end
   end
