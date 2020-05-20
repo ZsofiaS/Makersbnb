@@ -98,10 +98,13 @@ class SpacedOut < Sinatra::Base
 
   get '/requests/users/:id' do
     @booking = Booking.find(user_id: params[:id])
+    #@user_bookings = Booking.find_by_user(user_id:)
+    #@hosted_spaces = Space.find_by_user(user_id)
     erb :'bookings/requests'
   end
 
   get '/requests/spaces/:id' do
+    #@requested_bookings = Bookings.find_by_space(space_id)
     erb :'bookings/spaces'
   end
 end
