@@ -1,14 +1,15 @@
 class Space
 
-  attr_reader :name, :description, :price_per_night, :available_from, :available_to, :id
+  attr_reader :id, :name, :description, :price_per_night, :available_from, :available_to, :user_id
 
-  def initialize(id=nil, name, description, price_per_night, available_from, available_to)
+  def initialize(id=nil, name, description, price_per_night, available_from, available_to, user_id)
+    @id = id
     @name = name
     @description = description
     @price_per_night = price_per_night
     @available_from = available_from
     @available_to = available_to
-    @id = id
+    @user_id = user_id
   end
 
   def price_per_night_formatted
@@ -31,5 +32,8 @@ class Space
     space = DatabaseConnection.query("SELECT * FROM spaces WHERE id='#{id}'")
     Space.new(space[0]['id'], space[0]['name'], space[0]['description'], Money.new(space[0]['price']), Date.parse(space[0]['available_from']), Date.parse(space[0]['available_to']))
   end
+
+  # def self.find_by_user(user_id)
+  #   space = DatabaseConnection.query("SELECT * FROM spaces WHERE user_id='#{user_id}'")
   
 end

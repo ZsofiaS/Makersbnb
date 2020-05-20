@@ -5,7 +5,7 @@ describe Space do
   let(:price_per_night) { double(fractional: 1000) }
   let(:available_from) { double(strftime: '2022-10-10') }
   let(:available_to) { double(strftime: '2025-11-16') }
-  let(:subject) { described_class.new(1, 'test space title', 'test description', price_per_night, available_from, available_to) }
+  let(:subject) { described_class.new(1, 'test space title', 'test description', price_per_night, available_from, available_to, 1) }
 
   describe '#id' do
     it 'should be a integer' do
@@ -54,6 +54,12 @@ describe Space do
   describe '#available_to' do
     it 'equals object dependency object passed in on creation' do
       expect(subject.available_to).to eq(available_to)
+    end
+  end
+
+  describe '#user_id' do
+    it 'is an integer' do
+      expect(subject.user_id).to be_a_kind_of(Integer)
     end
   end
 
