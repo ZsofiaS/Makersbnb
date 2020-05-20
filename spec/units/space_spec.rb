@@ -5,8 +5,13 @@ describe Space do
   let(:price_per_night) { double(fractional: 1000) }
   let(:available_from) { double(strftime: '2022-10-10') }
   let(:available_to) { double(strftime: '2025-11-16') }
-  let(:subject) { described_class.new('test space title', 'test description', price_per_night, available_from, available_to) }
+  let(:subject) { described_class.new( id = 1, 'test space title', 'test description', price_per_night, available_from, available_to) }
 
+  describe '#id' do
+    it 'should be a integer' do
+      expect(subject.id).to be_a_kind_of(Integer)
+    end
+  end
   describe '#name' do
     it 'should be a string' do
       expect(subject.name).to be_a_kind_of(String) 
@@ -73,5 +78,12 @@ describe Space do
       expect(subject.save).not_to be_nil
     end
   end
+
+  describe '#.find' do
+    it 'finds data from the spaces table' do
+      expect(described_class.find(1)).not_to be nil
+    end
+  end
+
 
 end

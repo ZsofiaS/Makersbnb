@@ -14,8 +14,12 @@ class User
   end
 
   def self.create(username, name, email, password)
-    # add test for clash of username or email
-    DatabaseConnection.query("INSERT INTO users (username, name, email, password) VALUES ('#{username}', '#{name}', '#{email}', '#{password}');")
+    if self.username_and_email_test(username, email)
+      DatabaseConnection.query("INSERT INTO users (username, name, email, password) VALUES ('#{username}', '#{name}', '#{email}', '#{password}');")
+      true
+    else
+      false
+    end
   end
 
   def self.find(id)
@@ -34,7 +38,8 @@ class User
     end
   end
 
-  # def username_and_email_test
-
-  # end
+  def self.username_and_email_test(username, email)
+    response = DatabaseConnection.query("SELECT * FROM users WHERE username = '#{username}' OR email = '#{email}'")
+    !response.any?
+  end
 end
