@@ -152,7 +152,19 @@ I want to be able to request a date that have already been requested
 | Space | @name |
 | | .all |
 
+## Control Flow: User
 
+Diagram showing action sequence for a user signing up:
+
+![sign_up](images/sign_up.png)
+
+Diagram showing action sequence for a user logging in:
+
+![login](images/login.png)
+
+Diagram showing action sequence for a forgotten password:
+
+![forgt_password](images/forgot_password.png)
 
 
 
