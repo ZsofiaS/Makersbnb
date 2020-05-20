@@ -1,4 +1,4 @@
-# Spaced Out
+![Spaced Out](images/spacedout_logo.png)
 
 Air B'n'B on an INTERGALACTIC scale. Our users take advantage of our state of the art web app to book short term accomodation in locations around the universe. From Saturn to Pluto, from the centre of the Andromeda nebula to the ends of the Milky Way, Spaced Out is where its at for your non-terrestrial travel needs!
 
@@ -152,7 +152,19 @@ I want to be able to request a date that have already been requested
 | Space | @name |
 | | .all |
 
+## Control Flow: User
 
+Diagram showing action sequence for a user signing up:
+
+![sign_up](images/sign_up.png)
+
+Diagram showing action sequence for a user logging in:
+
+![login](images/login.png)
+
+Diagram showing action sequence for a forgotten password:
+
+![forgt_password](images/forgot_password.png)
 
 
 
