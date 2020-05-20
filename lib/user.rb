@@ -33,8 +33,8 @@ class User
   private
 
   def get_user_data
-    response = DatabaseConnection.query("SELECT * FROM users WHERE username = '#{@username}' AND password = '#{BCrypt::Password.new(@password)}';")
-    if response.any?
+    response = DatabaseConnection.query("SELECT * FROM users WHERE username = '#{@username}';")
+    if response.any? && BCrypt::Password.new(response[0]['password']) == @password
       @id = response[0]['id'].to_i
       @realname = response[0]['name']
       @email = response[0]['email']
