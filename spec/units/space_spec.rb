@@ -5,7 +5,7 @@ describe Space do
   let(:price_per_night) { double(fractional: 1000) }
   let(:available_from) { double(strftime: '2022-10-10') }
   let(:available_to) { double(strftime: '2025-11-16') }
-  let(:subject) { described_class.new( id = 1, 'test space title', 'test description', price_per_night, available_from, available_to) }
+  let(:subject) { described_class.new(1, 'test space title', 'test description', price_per_night, available_from, available_to) }
 
   describe '#id' do
     it 'should be a integer' do
@@ -81,8 +81,14 @@ describe Space do
 
   describe '#.find' do
     it 'finds data from the spaces table' do
+      subject.save
       expect(described_class.find(1)).not_to be nil
     end
+    it 'should contaion instances of Space'do 
+      subject.save
+      expect(described_class.find(1)).to be_a_kind_of(Space)
+  end
+
   end
 
 

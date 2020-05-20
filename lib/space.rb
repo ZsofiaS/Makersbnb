@@ -29,7 +29,8 @@ class Space
   end
 
   def self.find(id)
-    DatabaseConnection.query("SELECT * FROM spaces WHERE id=#{id}")
+    space = DatabaseConnection.query("SELECT * FROM spaces WHERE id='#{id}'")
+    Space.new(space[0]['id'], space[0]['name'], space[0]['description'], Money.new(space[0]['price']), Date.parse(space[0]['available_from']), Date.parse(space[0]['available_to']))
   end
-
+  
 end
