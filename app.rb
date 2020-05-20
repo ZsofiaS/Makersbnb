@@ -6,9 +6,11 @@ require './lib/user'
 require './lib/number_converter'
 require './currency_config.rb'
 require './database_connection_setup'
+require 'sinatra/flash'
 
 class SpacedOut < Sinatra::Base
   use Rack::Session::Pool
+  register Sinatra::Flash
 
   get '/' do
     'hello spaced out team'
@@ -32,7 +34,13 @@ class SpacedOut < Sinatra::Base
   post '/users/log-in' do
     'Welcome, test'
     session[:user] = User.new(params[:username], params[:password])
-    redirect('/spaces')
+    if session[:user].email == nil || session[:user].password == nil
+      session[:user] = nil
+      flash[:notice] = "Username or password is incorrect"
+      redirect('/users/log-in')
+    else
+      redirect('/spaces')
+    end
   end
 
   get '/spaces/new' do
