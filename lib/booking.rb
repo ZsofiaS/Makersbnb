@@ -11,7 +11,6 @@ class Booking
     @user_id = user_id
     @date = DateTime.parse(date)
     @status = status
-
   end
 
   def print_date

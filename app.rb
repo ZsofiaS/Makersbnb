@@ -59,6 +59,7 @@ class SpacedOut < Sinatra::Base
 
   get '/spaces/:id' do
     # @space = Space.find(id: params[:id])
+    @date_invalid = session[:notice]
     erb :'bookings/booking'
   end
 
@@ -66,8 +67,14 @@ class SpacedOut < Sinatra::Base
     # Place holders ----
     @user_id = 1
     # -----------------
-    @date = Time.new(params[:year], params[:month], params[:day])
-    @booking = Booking.create(space_id: params[:id], user_id: @user_id, date: @date)
+
+    if (params[:booking_date] == "")
+      session[:notice] = "Please enter a valid date"
+      redirect '/spaces/1'
+    end
+
+    @booking_date = Date.parse(params[:booking_date])
+    @booking = Booking.create(space_id: params[:id], user_id: @user_id, date: @booking_date)
     redirect '/requests/users/'"#{@booking.user_id}"
   end
 
