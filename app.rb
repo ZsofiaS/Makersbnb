@@ -62,11 +62,13 @@ class SpacedOut < Sinatra::Base
 
   post '/spaces/new' do
     Space.new(
+      nil,
       params[:name],
       params[:description],
       Money.new(NumberConverter.two_decimal_place_float_to_int(params[:price_per_night].to_f)),
       Date.parse(params[:available_from]),
-      Date.parse(params[:available_to])
+      Date.parse(params[:available_to]),
+      1
     ).save
     
     redirect('/spaces')

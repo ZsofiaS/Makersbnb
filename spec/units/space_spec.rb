@@ -5,7 +5,7 @@ describe Space do
   let(:price_per_night) { double(fractional: 1000) }
   let(:available_from) { double(strftime: '2022-10-10') }
   let(:available_to) { double(strftime: '2025-11-16') }
-  let(:subject) { described_class.new(1, 'test space title', 'test description', price_per_night, available_from, available_to) }
+  let(:subject) { described_class.new(1, 'test space title', 'test description', price_per_night, available_from, available_to, 1) }
 
   describe '#id' do
     it 'should be a integer' do
@@ -57,6 +57,12 @@ describe Space do
     end
   end
 
+  describe '#user_id' do
+    it 'has a foreign owner id' do
+      expect(subject.user_id).to eq(1)
+    end
+  end
+
   describe '.all' do
     it 'should be an array' do
       expect(described_class.all).to be_a_kind_of(Array)
@@ -68,7 +74,7 @@ describe Space do
     end
 
     it 'should have the correct name from list' do
-      new_space = described_class.new('new space', 'test description', price_per_night, available_from, available_to).save
+      new_space = described_class.new(nil, 'new space', 'test description', price_per_night, available_from, available_to, 1).save
       expect(described_class.all.last.name).to eq('new space')
     end
   end
