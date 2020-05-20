@@ -1,5 +1,0 @@
-CREATE TABLE bookings(id SERIAL PRIMARY KEY,
-date TIMESTAMP,
-space_id INTEGER,
-user_id INTEGER,
-status VARCHAR(20));

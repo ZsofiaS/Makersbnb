@@ -99,8 +99,13 @@ So that I can give the host options
 I want to be able to request a date that have already been requested
 ```
 
-## Database tables
+## Database setup
+```
+CREATE DATABASE spaced_out;
+CREATE DATABASE spaced_out_test;
+```
 
+## Database tables
 `users` table:
 | Field | Type |
 | --- | --- |
@@ -152,7 +157,5 @@ I want to be able to request a date that have already been requested
 | Space | @name |
 | | .all |
 
-
-
-
+//
 
