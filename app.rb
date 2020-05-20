@@ -32,7 +32,6 @@ class SpacedOut < Sinatra::Base
   post '/users/log-in' do
     'Welcome, test'
     session[:user] = User.new(params[:username], params[:password])
-    session[:user].get_user_data
     redirect('/spaces')
   end
 
