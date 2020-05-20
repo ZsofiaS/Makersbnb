@@ -99,8 +99,13 @@ So that I can give the host options
 I want to be able to request a date that have already been requested
 ```
 
-## Database tables
+## Database setup
+```
+CREATE DATABASE spaced_out;
+CREATE DATABASE spaced_out_test;
+```
 
+## Database tables
 `users` table:
 | Field | Type |
 | --- | --- |
@@ -126,8 +131,9 @@ I want to be able to request a date that have already been requested
 | name | VARCHAR(300) |
 | description | VARCHAR(2000) |
 | location | VARCHAR(100) |
-| available_to | DATETIME |
-| available_from | DATETIME |
+| available_to | DATE |
+| available_from | DATE |
+| price | INT |
 | images | URL |
 
 
@@ -152,6 +158,8 @@ I want to be able to request a date that have already been requested
 | Space | @name |
 | | .all |
 
+
+//
 ## Control Flow: User
 
 Diagram showing action sequence for a user signing up:
@@ -165,6 +173,5 @@ Diagram showing action sequence for a user logging in:
 Diagram showing action sequence for a forgotten password:
 
 ![forgt_password](images/forgot_password.png)
-
 
 

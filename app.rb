@@ -61,19 +61,19 @@ class SpacedOut < Sinatra::Base
   end
 
   post '/spaces/new' do
-    @newspace = Space.new(
+    Space.new(
       params[:name],
       params[:description],
       Money.new(NumberConverter.two_decimal_place_float_to_int(params[:price_per_night].to_f)),
       Date.parse(params[:available_from]),
       Date.parse(params[:available_to])
-    )
-    Space.all.push(@newspace)
+    ).save
+    
     redirect('/spaces')
   end
 
   get '/spaces' do
-    @spaces = Space.all
+    @spaces = Space.all 
     erb:'spaces/index'
   end
 
