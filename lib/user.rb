@@ -1,4 +1,4 @@
-require 'pg'
+require_relative 'database_connection'
 
 class User
 
@@ -13,16 +13,16 @@ class User
   end
 
   def self.create(username, name, email, password)
-    ENV['ENVIRONMENT'] == 'test' ? db = 'spaced_out_test' : db = 'spaced_out'
-    connection = PG.connect :dbname => db
+    # ENV['ENVIRONMENT'] == 'test' ? db = 'spaced_out_test' : db = 'spaced_out'
+    # connection = PG.connect :dbname => db
     # add test for clash of username or email
-    connection.exec("INSERT INTO users (username, name, email, password) VALUES ('#{username}', '#{name}', '#{email}', '#{password}');")
+    DatabaseConnection.query("INSERT INTO users (username, name, email, password) VALUES ('#{username}', '#{name}', '#{email}', '#{password}');")
   end
 
   def get_user_data
-    ENV['ENVIRONMENT'] == 'test' ? db = 'spaced_out_test' : db = 'spaced_out'
-    connection = PG.connect :dbname => db
-    response = connection.exec("SELECT * FROM users WHERE username = '#{@username}' AND password = '#{@password}';")  
+    # ENV['ENVIRONMENT'] == 'test' ? db = 'spaced_out_test' : db = 'spaced_out'
+    # connection = PG.connect :dbname => db
+    response = DatabaseConnection.query("SELECT * FROM users WHERE username = '#{@username}' AND password = '#{@password}';")  
     if response.any?
       @id = response[0]['id']
       @realname = response[0]['name']
