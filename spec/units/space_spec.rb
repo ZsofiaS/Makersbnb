@@ -81,14 +81,27 @@ describe Space do
 
   describe '#.find' do
     it 'finds data from the spaces table' do
-      subject.save
       expect(described_class.find(1)).not_to be nil
     end
-    it 'should contaion instances of Space'do 
-      subject.save
-      expect(described_class.find(1)).to be_a_kind_of(Space)
-  end
 
+    it 'should contaion instances of Space'do 
+      expect(described_class.find(1)).to be_a_kind_of(Space)
+    end
+
+    it 'should have a name' do
+      expect(described_class.find(1).name).to eq('Mars')
+    end
+
+    it 'should have an availability dates' do
+      expect(described_class.find(1).available_from).to be_a_kind_of(Date)
+      expect(described_class.find(1).available_to).to be_a_kind_of(Date)
+      expect(described_class.find(1).available_from.strftime('%Y-%m-%d')).to eq('2020-10-10')
+    end
+
+    it 'should have money' do
+      expect(described_class.find(1).price_per_night).to be_a_kind_of(Money)
+      expect(described_class.find(1).price_per_night.fractional).to eq(1000)
+    end
   end
 
 
