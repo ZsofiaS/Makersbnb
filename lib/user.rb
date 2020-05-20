@@ -1,4 +1,4 @@
-require 'pg'
+require_relative 'database_connection'
 
 class User
 
@@ -10,23 +10,26 @@ class User
     @realname
     @email
     @id
+    get_user_data
   end
 
   def self.create(username, name, email, password)
-    ENV['ENVIRONMENT'] == 'test' ? db = 'spaced_out_test' : db = 'spaced_out'
-    connection = PG.connect :dbname => db
     # add test for clash of username or email
-    connection.exec("INSERT INTO users (username, name, email, password) VALUES ('#{username}', '#{name}', '#{email}', '#{password}');")
+    DatabaseConnection.query("INSERT INTO users (username, name, email, password) VALUES ('#{username}', '#{name}', '#{email}', '#{password}');")
+  end
+
+  def self.find(id)
+    response = DatabaseConnection.query("SELECT * FROM users WHERE id = #{id}")
+    User.new(response[0]['username'], response[0]['password'])
   end
 
   def get_user_data
-    ENV['ENVIRONMENT'] == 'test' ? db = 'spaced_out_test' : db = 'spaced_out'
-    connection = PG.connect :dbname => db
-    response = connection.exec("SELECT * FROM users WHERE username = '#{@username}' AND password = '#{@password}';")  
+    response = DatabaseConnection.query("SELECT * FROM users WHERE username = '#{@username}' AND password = '#{@password}';")  
     if response.any?
-      @id = response[0]['id']
+      @id = response[0]['id'].to_i
       @realname = response[0]['name']
       @email = response[0]['email']
+      puts "#{@realname} #{@id}"
     else
       false # this bit needs to do something
     end
