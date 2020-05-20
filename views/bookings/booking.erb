@@ -1,6 +1,10 @@
 
 <h1>Request booking</h1>
 
+<% if @date_invalid %>
+    <div class="notice"><%= @date_invalid %></div>
+<% end %>
+
 <form class="" action="/spaces/1" method="post">
   <select name="day" class="datefield day">
     <option value="">Day</option>
