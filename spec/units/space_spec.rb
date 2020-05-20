@@ -56,12 +56,20 @@ describe Space do
     it 'should be an array' do
       expect(described_class.all).to be_a_kind_of(Array)
     end
+
+    it 'should contain instances of Space' do
+      subject.save
+      expect(described_class.all.last).to be_a_kind_of(Space)
+    end
+
+    it 'should have the correct name from list' do
+      new_space = described_class.new('new space', 'test description', price_per_night, available_from, available_to).save
+      expect(described_class.all.last.name).to eq('new space')
+    end
   end
 
   describe '#save' do
     it 'saves data to the spaces table' do
-      p 'HELLO HELLO HELLO'
-      p subject.price_per_night.fractional
       expect(subject.save).not_to be_nil
     end
   end

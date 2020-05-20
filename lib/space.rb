@@ -17,7 +17,11 @@ class Space
   end
 
   def self.all
-    @@spaces
+    spaces = []
+    DatabaseConnection.query("SELECT * FROM spaces").each do |space|
+      spaces << Space.new(space['name'], space['description'], Money.new(space['price']), Date.parse(space['available_from']), Date.parse(space['available_to']))
+    end
+    spaces
   end
 
   def save

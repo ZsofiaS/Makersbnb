@@ -1,10 +1,9 @@
 require 'pg'
 
 def setup_test_database
-  p "Setting up test database..."
-
   connection = PG.connect(dbname: 'spaced_out_test')
 
   # Clear the bookmarks table
-  connection.exec("TRUNCATE bookings, users;")
+  connection.exec("TRUNCATE bookings, users, spaces;")
+  connection.exec("INSERT INTO users (id, username, name, email, password) VALUES (1, 'Joe1984', 'Joe Bloggs', 'joebloggs@hotmail.com', '12345');")
 end
