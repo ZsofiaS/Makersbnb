@@ -2,20 +2,7 @@ require 'user'
 require 'pg'
 
 describe User do
-
-  # describe 'variables' do
-  #   it 'initialises the variables when login user' do
-  #     user = User.new('patrick', '1984')
-  #     expect(user.username).to eq('patrick')
-  #     expect(user.password).to eq('12345')
-  #     expect(user).to respond_to(:realname)
-  #     expect(user).to respond_to(:email)
-  #     expect(user).to respond_to(:id)
-  #   end
-  # end
-
-  #split into 2 tests
-
+  
   describe '#get_user_data' do 
     it 'can return user object by username and password' do
       subject = User.new('Joe1984', '12345')

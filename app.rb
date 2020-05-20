@@ -13,7 +13,11 @@ class SpacedOut < Sinatra::Base
   register Sinatra::Flash
 
   get '/' do
-    'hello spaced out team'
+    if defined?(session[:user])
+      redirect '/users/log-in' 
+    else
+      redirect '/spaces'
+    end
   end
 
   get '/users/new' do
@@ -45,6 +49,11 @@ class SpacedOut < Sinatra::Base
     else
       redirect('/spaces')
     end
+  end
+
+  get '/signout' do 
+    session[:user] = nil
+    redirect '/users/log-in'
   end
 
   get '/spaces/new' do
