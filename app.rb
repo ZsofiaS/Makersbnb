@@ -42,7 +42,7 @@ class SpacedOut < Sinatra::Base
 
   post '/spaces/new' do
     @newspace = Space.new(
-      params[:name], 
+      params[:name],
       params[:description],
       Money.new(NumberConverter.two_decimal_place_float_to_int(params[:price_per_night].to_f)),
       Date.parse(params[:available_from]),
@@ -57,28 +57,26 @@ class SpacedOut < Sinatra::Base
     erb:'spaces/index'
   end
 
-  get '/spaces/1' do
-    erb :'booking'
+  get '/spaces/:id' do
+    # @space = Space.find(id: params[:id])
+    erb :'bookings/booking'
   end
 
-  post '/spaces/1' do
+  post '/spaces/:id' do
     # Place holders ----
-    @space_id = 1
     @user_id = 1
     # -----------------
     @date = Time.new(params[:year], params[:month], params[:day])
-
-    p @date
-
-    @booking = Booking.create(space_id: @space_id, user_id: @user_id, date: @date)
-    session[:booking_id] = @booking.id
-
-    p @booking
-    redirect '/requests'
+    @booking = Booking.create(space_id: params[:id], user_id: @user_id, date: @date)
+    redirect '/requests/users/'"#{@booking.user_id}"
   end
 
-  get '/requests' do
-    @booking = Booking.find(id: session[:booking_id])
-    erb :'requests'
+  get '/requests/users/:id' do
+    @booking = Booking.find(user_id: params[:id])
+    erb :'bookings/requests'
+  end
+
+  get '/requests/spaces/:id' do
+    erb :'bookings/spaces'
   end
 end
