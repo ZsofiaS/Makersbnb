@@ -23,23 +23,16 @@ class User
     User.new(response[0]['username'], response[0]['password'])
   end
 
+  private
+
   def get_user_data
     response = DatabaseConnection.query("SELECT * FROM users WHERE username = '#{@username}' AND password = '#{@password}';")  
     if response.any?
       @id = response[0]['id'].to_i
       @realname = response[0]['name']
       @email = response[0]['email']
-      puts "#{@realname} #{@id}"
-    else
-      false # this bit needs to do something
     end
   end
-
-  private
-
-  # def password_test
-
-  # end
 
   # def username_and_email_test
 
