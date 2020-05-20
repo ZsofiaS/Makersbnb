@@ -131,8 +131,9 @@ CREATE DATABASE spaced_out_test;
 | name | VARCHAR(300) |
 | description | VARCHAR(2000) |
 | location | VARCHAR(100) |
-| available_to | DATETIME |
-| available_from | DATETIME |
+| available_to | DATE |
+| available_from | DATE |
+| price | INT |
 | images | URL |
 
 
