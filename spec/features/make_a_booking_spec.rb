@@ -1,4 +1,12 @@
 feature "Making a booking" do
+
+  before(:each) do
+    visit('/users/log-in')
+    fill_in('username', with: 'Joe1984')
+    fill_in('password', with: '12345')
+    click_button('submit')
+  end
+
   scenario "User requests a booking" do
     visit("/spaces/1")
     expect(page).to have_button("Request booking")
@@ -28,15 +36,15 @@ feature "Making a booking" do
       click_button('Show the space')
       expect(page).to have_content('Request booking')
     end
-  
+
     scenario 'Dates are submitted' do
       expect(page).to have_content("1 - May - 2021")
     end
-  
+
     scenario 'Booking information displayed' do
       expect(page).to have_content('unconfirmed')
     end
-  
+
   end
 
 end
