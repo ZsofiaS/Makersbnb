@@ -25,8 +25,6 @@ class SpacedOut < Sinatra::Base
   end
 
   post '/users/new' do
-    session[:username] = params[:username]
-    session[:password] = params[:password]
     if User.create(params[:username], params[:name], params[:email], params[:password])
       redirect '/users/log-in'
     else

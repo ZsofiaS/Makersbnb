@@ -34,7 +34,7 @@ describe User do
   end
 
   describe '#username and email test' do 
-    it 'returns false when username exist db' do 
+    it 'returns false when username exist in db' do 
       expect(User.username_and_email_test('Joe1984', 'random@hotmail.com')).to be false
     end
     it 'returns false when email exisits on db' do 
