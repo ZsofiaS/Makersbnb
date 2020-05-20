@@ -5,6 +5,22 @@
   <title>Spaced Out</title>
 </head>
 <body>
-  <%= yield %>
+	<head>
+		<h1>SPACED OUT</h1>
+	</head>
+		<% if session[:user] == nil %>
+		<nav>
+			<a href="/users/new">signup</a>
+		</nav>
+		<% else %>
+			<nav>
+				<a href="">spaces</a>
+				<a href="">my requests</a>
+				<a href="">add space</a>
+				<a href="/signout">sign out</a>
+			</nav>
+			<h4>hello <%= session[:user].realname %></h4>
+		<% end %>
+ 	<%= yield %>
 </body>
 </html>

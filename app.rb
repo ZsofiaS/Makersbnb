@@ -13,7 +13,11 @@ class SpacedOut < Sinatra::Base
   register Sinatra::Flash
 
   get '/' do
-    'hello spaced out team'
+    if defined?(session[:user])
+      redirect '/users/log-in' 
+    else
+      redirect '/spaces'
+    end
   end
 
   get '/users/new' do
@@ -23,8 +27,12 @@ class SpacedOut < Sinatra::Base
   post '/users/new' do
     session[:username] = params[:username]
     session[:password] = params[:password]
-    User.create(params[:username], params[:name], params[:email], params[:password])
-    redirect '/users/log-in'
+    if User.create(params[:username], params[:name], params[:email], params[:password])
+      redirect '/users/log-in'
+    else
+      flash[:notice] = "Email or username already taken"
+      redirect '/users/new'
+    end
   end
 
   get '/users/log-in' do
@@ -41,6 +49,11 @@ class SpacedOut < Sinatra::Base
     else
       redirect('/spaces')
     end
+  end
+
+  get '/signout' do 
+    session[:user] = nil
+    redirect '/users/log-in'
   end
 
   get '/spaces/new' do
