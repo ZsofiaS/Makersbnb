@@ -23,8 +23,12 @@ class SpacedOut < Sinatra::Base
   post '/users/new' do
     session[:username] = params[:username]
     session[:password] = params[:password]
-    User.create(params[:username], params[:name], params[:email], params[:password])
-    redirect '/users/log-in'
+    if User.create(params[:username], params[:name], params[:email], params[:password])
+      redirect '/users/log-in'
+    else
+      flash[:notice] = "Email or username already taken"
+      redirect '/users/new'
+    end
   end
 
   get '/users/log-in' do
