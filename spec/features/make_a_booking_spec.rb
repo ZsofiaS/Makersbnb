@@ -6,9 +6,7 @@ feature "Making a booking" do
 
   scenario 'User can select dates' do
     visit('/spaces/1')
-    expect(page).to have_select('day')
-    expect(page).to have_select('month')
-    expect(page).to have_select('year')
+    expect(page).to have_css('.date_selector')
   end
 
   scenario 'throws error if no date is selected' do
@@ -21,9 +19,7 @@ feature "Making a booking" do
 
     before(:each) do
       visit('/spaces/1')
-      select("1", :from => "day")
-      select("May", :from => "month")
-      select("2021", :from => "year")
+      fill_in('booking_date', with: '01-05-2021')
       click_button 'Request booking'
     end
 

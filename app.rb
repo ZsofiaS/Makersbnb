@@ -68,14 +68,13 @@ class SpacedOut < Sinatra::Base
     @user_id = 1
     # -----------------
 
-    if (params[:year] == "" || params[:month] == "" || params[:day] == "")
+    if (params[:booking_date] == "")
       session[:notice] = "Please enter a valid date"
       redirect '/spaces/1'
     end
 
-    @date = Time.new(params[:year], params[:month], params[:day])
-
-    @booking = Booking.create(space_id: params[:id], user_id: @user_id, date: @date)
+    @booking_date = Date.parse(params[:booking_date])
+    @booking = Booking.create(space_id: params[:id], user_id: @user_id, date: @booking_date)
     redirect '/requests/users/'"#{@booking.user_id}"
   end
 
