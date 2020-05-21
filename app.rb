@@ -3,7 +3,6 @@ require 'money'
 require './lib/space'
 require './lib/booking'
 require './lib/user'
-require './lib/mail'
 require './lib/number_converter'
 require './currency_config.rb'
 require './database_connection_setup'
@@ -13,7 +12,6 @@ require 'pony'
 class SpacedOut < Sinatra::Base
   use Rack::Session::Pool
   register Sinatra::Flash
-  include Pony
 
   get '/' do
     !session[:user] ? (redirect '/users/log-in') : (redirect '/spaces')
@@ -39,6 +37,7 @@ class SpacedOut < Sinatra::Base
           :domain               => "localhost.localdomain"
         }
       }
+      p params[:email]
       Pony.mail :to => params[:email],
                 :from => 'spacedout380@gmail.com',
                 :subject => 'Thank you for signing up'

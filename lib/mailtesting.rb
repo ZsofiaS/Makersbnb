@@ -14,8 +14,6 @@ Pony.options = {
   }
 }
 
-def send_mail(email)
-  Pony.mail :to => email,
+  Pony.mail :to => '',
             :from => 'spacedout380@gmail.com',
             :subject => 'Thank you for signing up'
-end
