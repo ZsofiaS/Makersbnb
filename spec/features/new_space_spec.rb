@@ -16,6 +16,6 @@ feature 'new space' do
     expect(page).to have_content('$120.43')
     expect(page).to have_content('01-01-2020')
     expect(page).to have_content('30-01-2020')
-    expect(page).to have_content('User id: 1')
+    expect(page).to have_content('Joe1984')
   end
 end

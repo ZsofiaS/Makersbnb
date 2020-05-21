@@ -68,7 +68,7 @@ class SpacedOut < Sinatra::Base
       Date.parse(params[:available_from]),
       Date.parse(params[:available_to]),
       session[:user].id
-    ).save
+    ).persist
 
     redirect('/spaces')
   end

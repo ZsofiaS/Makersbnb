@@ -109,6 +109,11 @@ describe Space do
       expect(described_class.find(1).price_per_night.fractional).to eq(1000)
     end
   end
-
+  
+  describe '#persist' do
+    it 'saves the data with user_id' do
+      expect(subject.persist).not_to be nil
+    end
+  end
 
 end
