@@ -1,7 +1,7 @@
 require 'pony'
 
 Pony.options = {
-  :body => "Thank you for signing up",
+  :body => "Thank you for signing up to Spaced Out!",
   :via => :smtp,
   :via_options => {
     :address              => 'smtp.gmail.com',
@@ -14,6 +14,8 @@ Pony.options = {
   }
 }
 
-  Pony.mail :to => '',
+def send_mail(email)
+  Pony.mail :to => email,
             :from => 'spacedout380@gmail.com',
             :subject => 'Thank you for signing up'
+end
