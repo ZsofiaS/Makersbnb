@@ -32,7 +32,6 @@ class SpacedOut < Sinatra::Base
   end
 
   get '/users/log-in' do
-    session[:spaces] = Space.all
     session[:user] ? (redirect '/spaces') : (erb :'users/login')
   end
 
