@@ -1,9 +1,23 @@
+
+
+<div class="col-md-6 offset-md-3 p-3">
+
+<br>
+<br>
+
 <h4>Please log in</h4>
-<form action='/users/log-in' method='post' autocomplete="off">
+<br>
+
+<form class='form-signin' action='/users/log-in' method='post' autocomplete="off">
+<div class="form-group">
   <input type='text' name='username' placeholder='username'>
   <br>
+</div>
+<div class="form-group">
   <input type='password' name='password' placeholder='password'>
   <br>
-  <input type='submit' name='submit' value='submit'>
+</div>
+<input class='btn btn-light' type='submit' name='submit' value='submit'>
 </form>
 <h4><%= flash[:notice] %></h4>
+</div>

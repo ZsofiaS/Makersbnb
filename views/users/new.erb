@@ -1,6 +1,9 @@
-<div class="col-md-6 offset-md-3">
+<div class="col-md-6 offset-md-3 p-3">
 
+<br>
+<br>
 <h4>Please sign up</h4>
+<br>
 
 <form class='form-signin' action='/users/new' method='post' autocomplete="off">
 <div class="form-group">
@@ -19,7 +22,7 @@
   <input type='password' name='password' placeholder='password'>
   <br>
 </div>
-<input class='btn btn-primary' type='submit' name='submit' value='submit'>
+<input class='btn btn-light' type='submit' name='submit' value='submit'>
 </form>
 <h4><%= flash[:notice] %></h4>
 </div>
