@@ -25,8 +25,6 @@ class SpacedOut < Sinatra::Base
   end
 
   post '/users/new' do
-    session[:username] = params[:username]
-    session[:password] = params[:password]
     if User.create(params[:username], params[:name], params[:email], params[:password])
       redirect '/users/log-in'
     else
@@ -40,10 +38,8 @@ class SpacedOut < Sinatra::Base
   end
 
   post '/users/log-in' do
-    'Welcome, test'
-    session[:user] = User.new(params[:username], params[:password])
-    if session[:user].email == nil
-      session[:user] = nil
+    session[:user] = User.authenticate(params[:username], params[:password])
+    if session[:user] == nil
       flash[:notice] = "Username or password is incorrect"
       redirect('/users/log-in')
     else
