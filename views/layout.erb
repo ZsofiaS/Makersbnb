@@ -8,7 +8,7 @@
 </head>
 <body class='bg-dark text-white'>
 		<nav style='background-color: #1a1a1a !important;' class="navbar navbar-expand navbar-dark bg-dark">
-      <a class='navbar-brand'>SPACED OUT</a>
+      <a class='navbar-brand' href="/">SPACED OUT</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -43,8 +43,20 @@
         <% end %>
       </div>
     </nav>
-    <div class="bg-dark text-white">
       <div class="col-6 offset-3">
+          <div class="bg-dark text-white">
+            <div class="mx-auto">
+              <% if flash[:notice] %>
+                <br>
+                <br>
+                <div class="alert alert-light alert-dismissible fade show" role="alert">
+                  <strong><%= flash[:notice] %></strong>
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+              <% end %>
+            </div>
    	      <%= yield %>
       </div>
     </div>
