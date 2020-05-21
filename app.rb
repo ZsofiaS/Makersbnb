@@ -14,7 +14,7 @@ class SpacedOut < Sinatra::Base
 
   get '/' do
     if defined?(session[:user])
-      redirect '/users/log-in' 
+      redirect '/users/log-in'
     else
       redirect '/spaces'
     end
@@ -38,10 +38,8 @@ class SpacedOut < Sinatra::Base
   end
 
   post '/users/log-in' do
-    'Welcome, test'
-    session[:user] = User.new(params[:username], params[:password])
-    if session[:user].email == nil
-      session[:user] = nil
+    session[:user] = User.authenticate(params[:username], params[:password])
+    if session[:user] == nil
       flash[:notice] = "Username or password is incorrect"
       redirect('/users/log-in')
     else
@@ -49,7 +47,7 @@ class SpacedOut < Sinatra::Base
     end
   end
 
-  get '/signout' do 
+  get '/signout' do
     session[:user] = nil
     redirect '/users/log-in'
   end
