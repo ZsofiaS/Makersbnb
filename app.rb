@@ -25,7 +25,11 @@ class SpacedOut < Sinatra::Base
   end
 
   post '/users/new' do
-    validate_signup(params)
+    if !validate_signup(params)
+      persist_form
+      redirect '/users/new'
+    end
+    p params
     if User.create(params[:username], params[:name], params[:email], params[:password])
       send_mail(params[:email])
       redirect '/users/log-in'

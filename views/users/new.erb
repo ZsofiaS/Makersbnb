@@ -7,16 +7,16 @@
 <form class='form-signin text-center' action='/users/new' method='post' autocomplete="off">
   <h4 class='h3 mb-3 font-weight-normal'>Please sign up</h4>
 <div class="form-group">
-  <input class='form-control' type='text' name='username' placeholder='username'>
+  <input class='form-control' type='text' name='username' placeholder='username' value="<%= flash[:username] %>">
 </div>
 <div class="form-group">
-  <input class='form-control' type='text' name='name' placeholder='name'>
+  <input class='form-control' type='text' name='name' placeholder='name' value="<%= flash[:name] %>">
 </div>
 <div class="form-group">
-  <input class='form-control' type='email' name='email' placeholder='email' >
+  <input class='form-control' type='email' name='email' placeholder='email' value="<%= flash[:email] %>">
 </div>
 <div class="form-group">
-  <input class='form-control' type='password' name='password' placeholder='password'>
+  <input class='form-control' type='password' name='password' placeholder='password' value="<%= flash[:password] %>">
 </div>
 <input class='btn btn-light' type='submit' name='submit' value='submit'>
 </form>
