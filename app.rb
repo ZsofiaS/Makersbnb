@@ -3,14 +3,17 @@ require 'money'
 require './lib/space'
 require './lib/booking'
 require './lib/user'
+require './lib/mail'
 require './lib/number_converter'
 require './currency_config.rb'
 require './database_connection_setup'
 require 'sinatra/flash'
+require 'pony'
 
 class SpacedOut < Sinatra::Base
   use Rack::Session::Pool
   register Sinatra::Flash
+  include Pony
 
   get '/' do
     !session[:user] ? (redirect '/users/log-in') : (redirect '/spaces')
@@ -23,6 +26,22 @@ class SpacedOut < Sinatra::Base
 
   post '/users/new' do
     if User.create(params[:username], params[:name], params[:email], params[:password])
+      Pony.options = {
+        :body => "Thank you for signing up",
+        :via => :smtp,
+        :via_options => {
+          :address              => 'smtp.gmail.com',
+          :port                 => '587',
+          :enable_starttls_auto => true,
+          :user_name            => 'spacedout380@gmail.com',
+          :password             => 'kpam rcuj gozz xflp',
+          :authentication       => :plain, # :plain, :login, :cram_md5, no auth by default
+          :domain               => "localhost.localdomain"
+        }
+      }
+      Pony.mail :to => params[:email],
+                :from => 'spacedout380@gmail.com',
+                :subject => 'Thank you for signing up'
       redirect '/users/log-in'
     else
       flash[:notice] = "Email or username already taken"
