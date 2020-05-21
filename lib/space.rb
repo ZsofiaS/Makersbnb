@@ -1,5 +1,5 @@
 require_relative './user'
-class Space 
+class Space
 
   attr_reader :name, :description, :price_per_night, :available_from, :available_to, :id, :user_id
 
@@ -18,11 +18,8 @@ class Space
   end
 
   def self.all
-    spaces = []
-    DatabaseConnection.query("SELECT * FROM spaces").each do |space|
-    spaces << Space.new(space['id'], space['name'], space['description'], Money.new(space['price']), Date.parse(space['available_from']), Date.parse(space['available_to']), space['user_id'])
-    end
-    spaces
+    spaces = DatabaseConnection.query("SELECT * FROM spaces")
+    spaces.map { |space| instance(space)}
   end
 
   def save
@@ -35,30 +32,26 @@ class Space
 
   def self.find(id)
     space = DatabaseConnection.query("SELECT * FROM spaces WHERE id='#{id}'")
-    Space.new(space[0]['id'], 
-    space[0]['name'], 
-    space[0]['description'], 
-    Money.new(space[0]['price']), 
-    Date.parse(space[0]['available_from']), 
-    Date.parse(space[0]['available_to']), 
-    space[0]['user_id'])
+    instance(space[0])
   end
-  
+
   def owner_name
     User.find(@user_id).username
   end
 
   def self.find_by_user(id)
-    spaces = []
-    DatabaseConnection.query("SELECT * FROM spaces WHERE user_id=#{id}").each do |space|
-    spaces << Space.new(space['id'], 
-    space['name'], space['description'], 
-    Money.new(space['price']), 
-    Date.parse(space['available_from']), 
-    Date.parse(space['available_to']), 
-    space['user_id'])
-    end
-    spaces
+    spaces = DatabaseConnection.query("SELECT * FROM spaces WHERE user_id=#{id}")
+    spaces.map { |space| instance(space)}
   end
-  
+
+  def self.instance(space)
+    Space.new(space['id'],
+    space['name'], space['description'],
+    Money.new(space['price']),
+    Date.parse(space['available_from']),
+    Date.parse(space['available_to']),
+    space['user_id'])
+  end
+
+  private_class_method :instance
 end
