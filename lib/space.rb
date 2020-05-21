@@ -53,5 +53,10 @@ class Space
     space['user_id'])
   end
 
+  def self.order_by(value)
+    spaces = DatabaseConnection.query("SELECT * FROM spaces ORDER BY #{value} DESC;")
+    spaces.map { |space| instance(space)}
+  end
+
   private_class_method :instance
 end

@@ -6,3 +6,10 @@
   Available To: <%= space.available_to.strftime("%d-%m-%Y") %><br>
   Listed by: <%= space.owner_name %> <br><br><br>
 <% end %>
+
+<form action = '/spaces' method = 'post'>
+  <input type = 'submit' name= 'submit' value='order_by_price'>
+  <input type = 'submit' name= 'submit' value='available_from'>
+  <input type = 'submit' name= 'submit' value='available_to'>
+  <input type = 'submit' name= 'submit' value='refresh'>
+</form>

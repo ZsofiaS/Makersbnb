@@ -31,6 +31,7 @@ class SpacedOut < Sinatra::Base
   end
 
   get '/users/log-in' do
+    session[:spaces] = Space.all
     session[:user] ? (redirect '/spaces') : (erb :'users/login')
   end
 
@@ -67,13 +68,32 @@ class SpacedOut < Sinatra::Base
       Date.parse(params[:available_to]),
       session[:user].id
     ).persist
-
+    session[:spaces] = Space.all
     redirect('/spaces')
   end
 
   get '/spaces' do
-    @spaces = Space.all
+    if session[:spaces].nil?
+      @spaces = Space.all
+    else
+      @spaces = session[:spaces]
+    end
     erb:'spaces/index'
+  end
+
+  post '/spaces' do
+
+    case params[:submit]
+      when 'order_by_price'
+        session[:spaces] = Space.order_by('price')
+      when 'available_from'
+        session[:spaces] = Space.order_by('available_from')
+      when 'available_to'
+        session[:spaces] = Space.order_by('available_to')
+      when 'refresh'
+        session[:spaces] = Space.all
+     end
+    redirect('/spaces')
   end
 
   get '/spaces/:id' do
