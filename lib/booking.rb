@@ -22,25 +22,25 @@ class Booking
                                     VALUES('#{date}', '#{space_id}', '#{user_id}', '#{'unconfirmed'}')
                                     RETURNING id, date, space_id, user_id, status;")
 
-    instance(result)
+    instance(result[0])
   end
 
   def self.find(id:)
     result = DatabaseConnection.query("SELECT * FROM bookings WHERE id = #{id}")
-    instance(result)
+    instance(result[0])
   end
 
   def self.find_by_space(id:)
     result = DatabaseConnection.query("SELECT * FROM bookings WHERE space_id = #{id}")
-    instance(result)
+    result.map{ |booking| instance(booking) }
   end
 
-  def self.instance(result)
-    Booking.new(id: result[0]['id'],
-             space_id: result[0]['space_id'],
-              user_id: result[0]['user_id'],
-                 date: result[0]['date'],
-               status: result[0]['status'])
+  def self.instance(booking)
+    Booking.new(id: booking['id'],
+             space_id: booking['space_id'],
+              user_id: booking['user_id'],
+                 date: booking['date'],
+               status: booking['status'])
   end
 
   private_class_method :instance

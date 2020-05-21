@@ -34,16 +34,16 @@ describe Booking do
   describe '.find' do
     let(:booking) { Booking.find(id: @booking_id) }
 
-    it "finds booking by user id" do
+    it "finds booking by it'sid" do
       expect(booking.id).to eq @booking_id
     end
   end
 
   describe '.find_by_space' do
-    let(:booking_space) { Booking.find_by_space(id: @space.id) }
+    let(:booking_spaces) { Booking.find_by_space(id: @space.id) }
 
     it "finds by space id" do
-      expect(booking_space.id).to eq @subject.id
+      expect(booking_spaces[0].id).to eq @subject.id
     end
   end
 end
