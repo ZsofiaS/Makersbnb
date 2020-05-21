@@ -30,6 +30,11 @@ class Booking
     instance(result[0])
   end
 
+  def self.find_by_user(id:)
+    result = DatabaseConnection.query("SELECT * FROM bookings WHERE user_id = #{id} ")
+    result.map{ |booking| instance(booking) }
+  end
+
   def self.find_by_space(id:)
     result = DatabaseConnection.query("SELECT * FROM bookings WHERE space_id = #{id}")
     result.map{ |booking| instance(booking) }

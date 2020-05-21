@@ -51,7 +51,7 @@ describe Booking do
     let(:booking_spaces) { Booking.find_by_user(id: @user.id) }
 
     it "finds by space id" do
-      expect(booking_spaces[0].id).to eq @subject.id
+      expect(booking_spaces[0].user_id).to eq '1'
     end
   end
 
