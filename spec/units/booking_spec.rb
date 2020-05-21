@@ -4,7 +4,7 @@ describe Booking do
 
   let(:date)        { Time.new(2021, 05, 12) }
   let(:user)        { double('User', :id => "1") }
-  let(:space)       { double('Space', :id => "1") }
+  let(:space)       { double('Space', :id => 1) }
   let(:subject)     { Booking.create(space_id: space.id, user_id: user.id, date: date) }
   let(:booking_id)  { subject.id }
 
@@ -32,6 +32,16 @@ describe Booking do
 
     it "finds booking by user id" do
       expect(booking.id).to eq booking_id
+    end
+  end
+
+  describe '.find_by_space' do
+    let(:booking_space) { Booking.find_by_space(id: space_id) }
+  
+    it "finds by space id" do 
+      # p "space id: #{space.id}"
+      # p subject
+      expect(booking_space.id).to subject.id
     end
   end
 

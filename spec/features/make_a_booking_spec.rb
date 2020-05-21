@@ -38,6 +38,8 @@ feature "Making a booking" do
     end
 
     scenario 'Dates are submitted' do
+      visit('/requests/users/1')
+      expect(page).to have_css('.space_title')
       expect(page).to have_content("1 - May - 2021")
     end
 

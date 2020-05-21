@@ -30,6 +30,13 @@ class Booking
     instance(result)
   end
 
+  def self.find_by_space(id:)
+    # p "hello"
+    result = DatabaseConnection.query("SELECT * FROM bookings WHERE space_id = #{1}")
+    # p result.first
+    instance(result) 
+  end
+
   def self.instance(result)
     Booking.new(id: result[0]['id'],
              space_id: result[0]['space_id'],
