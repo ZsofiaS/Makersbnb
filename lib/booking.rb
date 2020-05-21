@@ -25,8 +25,8 @@ class Booking
     instance(result)
   end
 
-  def self.find(user_id:)
-    result = DatabaseConnection.query("SELECT * FROM bookings WHERE user_id = #{user_id}")
+  def self.find(id:)
+    result = DatabaseConnection.query("SELECT * FROM bookings WHERE id = #{id}")
     instance(result)
   end
 
@@ -40,6 +40,11 @@ class Booking
 
   private_class_method :instance
 end
+
+# def self.find(user_id:)
+#   result = DatabaseConnection.query("SELECT * FROM bookings WHERE user_id = #{user_id}")
+#   instance(result)
+# end
 
 # def self.all
 #     result = DatabaseConnection.query("SELECT * FROM bookmarks")

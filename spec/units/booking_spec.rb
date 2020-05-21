@@ -28,10 +28,18 @@ describe Booking do
   end
 
   describe '.find' do
-    let(:booking) { Booking.find(user_id: user.id) }
+    let(:booking) { Booking.find(id: booking_id) }
 
     it "finds booking by user id" do
-      expect(subject.id).to eq booking.id
+      expect(booking.id).to eq booking_id
     end
   end
+
+  # describe '.find' do
+  #   let(:booking) { Booking.find(user_id: user.id) }
+  #
+  #   it "finds booking by user id" do
+  #     expect(subject.id).to eq booking.id
+  #   end
+  # end
 end
