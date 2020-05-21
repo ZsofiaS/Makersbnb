@@ -116,4 +116,15 @@ describe Space do
     end
   end
 
+  describe '#owner_name' do
+    it 'should be a string' do
+      expect(subject.owner_name).to be_a_kind_of(String)
+    end
+
+    it 'should return owner name' do
+      expect(subject.owner_name).to eq 'Joe1984'
+    end
+  end
+
+
 end

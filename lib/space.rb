@@ -1,4 +1,5 @@
-class Space
+require_relative './user'
+class Space 
 
   attr_reader :name, :description, :price_per_night, :available_from, :available_to, :id, :user_id
 
@@ -39,6 +40,9 @@ class Space
     Space.new(space[0]['id'], space[0]['name'], space[0]['description'], Money.new(space[0]['price']), Date.parse(space[0]['available_from']), Date.parse(space[0]['available_to']), space[0]['user_id'])
   end
   
+  def owner_name
+    User.find(@user_id).username
+  end
 
   
 end

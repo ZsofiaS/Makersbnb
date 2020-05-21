@@ -4,5 +4,5 @@
   <%= space.price_per_night_formatted %>
   <%= space.available_from.strftime("%d-%m-%Y") %>
   <%= space.available_to.strftime("%d-%m-%Y") %>
-  <%= User.find(space.user_id).username %>
+  <%= space.owner_name %>
 <% end %>
