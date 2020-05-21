@@ -1,13 +1,20 @@
 <h1>Request I've made</h1>
 
-<p>User ID: <%= @booking.user_id %></p>
+<!-- <p>User ID: <%= @booking.user_id %></p>
 <p>Date booked: <%= @booking.print_date %></p>
 <p>Space ID: <%= @booking.space_id %></p>
-<p>Status: <%= @booking.status %></p>
+<p>Status: <%= @booking.status %></p> -->
 
-<form class="" action="/spaces/<%= @booking.id %>" method="get">
+<!-- <form class="" action="/spaces/<%= @booking.id %>" method="get">
   <input type="submit" value="Show the space">
-</form>
+</form> -->
 
 <h1>Requests I received</h1>
 <p class="space_title">Space Title: </p>
+
+<% @user_bookings.each_with_index do |booking, index| %>
+<p><%= booking.date %>
+  <%= booking.status %>
+  <%= @space_names[index] %>
+</p>
+<% end %>
