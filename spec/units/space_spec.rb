@@ -126,5 +126,12 @@ describe Space do
     end
   end
 
+  describe '.find_by_user' do
+    it 'should return a list of spaces that the user owns' do
+      DatabaseConnection.query("INSERT INTO spaces (name, description, price, available_from, available_to, user_id) VALUES ('Pluto', 'BEST PLANET TO DIE', '1000', '2020-10-10', '2020-10-12', 1);")
+      DatabaseConnection.query("INSERT INTO spaces (name, description, price, available_from, available_to, user_id) VALUES ('Venus', 'BEST PLANET TO DIVING', '1000', '2020-10-10', '2020-10-12', 1);")
+      expect(described_class.find_by_user(1).count).to eq(3)
+    end
+  end
 
 end

@@ -44,5 +44,12 @@ class Space
     User.find(@user_id).username
   end
 
+  def self.find_by_user(id)
+    spaces = []
+    DatabaseConnection.query("SELECT * FROM spaces WHERE user_id=#{id}").each do |space|
+    spaces << Space.new(space['id'], space['name'], space['description'], Money.new(space['price']), Date.parse(space['available_from']), Date.parse(space['available_to']), space['user_id'])
+    end
+    spaces
+  end
   
 end
