@@ -1,13 +1,25 @@
+<div class="col-md-6 offset-md-3">
+
 <h4>Please sign up</h4>
-<form action='/users/new' method='post' autocomplete="off">
+
+<form class='form-signin' action='/users/new' method='post' autocomplete="off">
+<div class="form-group">
   <input type='text' name='username' placeholder='username'>
   <br>
+</div>
+<div class="form-group">
   <input type='text' name='name' placeholder='name'>
   <br>
-  <input type='text' name='email' placeholder='email' >
+</div>
+<div class="form-group">
+  <input type='email' name='email' placeholder='email' >
   <br>
+</div>
+<div class="form-group">
   <input type='password' name='password' placeholder='password'>
   <br>
-  <input type='submit' name='submit' value='submit'>
+</div>
+<input class='btn btn-primary' type='submit' name='submit' value='submit'>
 </form>
 <h4><%= flash[:notice] %></h4>
+</div>
