@@ -35,7 +35,13 @@ class Space
 
   def self.find(id)
     space = DatabaseConnection.query("SELECT * FROM spaces WHERE id='#{id}'")
-    Space.new(space[0]['id'], space[0]['name'], space[0]['description'], Money.new(space[0]['price']), Date.parse(space[0]['available_from']), Date.parse(space[0]['available_to']), space[0]['user_id'])
+    Space.new(space[0]['id'], 
+    space[0]['name'], 
+    space[0]['description'], 
+    Money.new(space[0]['price']), 
+    Date.parse(space[0]['available_from']), 
+    Date.parse(space[0]['available_to']), 
+    space[0]['user_id'])
   end
   
   def owner_name
@@ -45,7 +51,12 @@ class Space
   def self.find_by_user(id)
     spaces = []
     DatabaseConnection.query("SELECT * FROM spaces WHERE user_id=#{id}").each do |space|
-    spaces << Space.new(space['id'], space['name'], space['description'], Money.new(space['price']), Date.parse(space['available_from']), Date.parse(space['available_to']), space['user_id'])
+    spaces << Space.new(space['id'], 
+    space['name'], space['description'], 
+    Money.new(space['price']), 
+    Date.parse(space['available_from']), 
+    Date.parse(space['available_to']), 
+    space['user_id'])
     end
     spaces
   end
