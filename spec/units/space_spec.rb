@@ -5,7 +5,7 @@ describe Space do
   let(:price_per_night) { double(fractional: 1000) }
   let(:available_from) { double(strftime: '2022-10-10') }
   let(:available_to) { double(strftime: '2025-11-16') }
-  let(:subject) { described_class.new(1, 'test space title', 'test description', price_per_night, available_from, available_to) }
+  let(:subject) { described_class.new(1, 'test space title', 'test description', price_per_night, available_from, available_to, 1) }
 
   describe '#id' do
     it 'should be a integer' do
@@ -57,6 +57,12 @@ describe Space do
     end
   end
 
+  describe '#user_id' do
+    it 'has a foreign owner id' do
+      expect(subject.user_id).to eq(1)
+    end
+  end
+
   describe '.all' do
     it 'should be an array' do
       expect(described_class.all).to be_a_kind_of(Array)
@@ -68,7 +74,7 @@ describe Space do
     end
 
     it 'should have the correct name from list' do
-      new_space = described_class.new('new space', 'test description', price_per_night, available_from, available_to).save
+      new_space = described_class.new(nil, 'new space', 'test description', price_per_night, available_from, available_to, 1).save
       expect(described_class.all.last.name).to eq('new space')
     end
   end
@@ -103,6 +109,29 @@ describe Space do
       expect(described_class.find(1).price_per_night.fractional).to eq(1000)
     end
   end
+  
+  describe '#persist' do
+    it 'saves the data with user_id' do
+      expect(subject.persist).not_to be nil
+    end
+  end
 
+  describe '#owner_name' do
+    it 'should be a string' do
+      expect(subject.owner_name).to be_a_kind_of(String)
+    end
+
+    it 'should return owner name' do
+      expect(subject.owner_name).to eq 'Joe1984'
+    end
+  end
+
+  describe '.find_by_user' do
+    it 'should return a list of spaces that the user owns' do
+      DatabaseConnection.query("INSERT INTO spaces (name, description, price, available_from, available_to, user_id) VALUES ('Pluto', 'BEST PLANET TO DIE', '1000', '2020-10-10', '2020-10-12', 1);")
+      DatabaseConnection.query("INSERT INTO spaces (name, description, price, available_from, available_to, user_id) VALUES ('Venus', 'BEST PLANET TO DIVING', '1000', '2020-10-10', '2020-10-12', 1);")
+      expect(described_class.find_by_user(1).count).to eq(3)
+    end
+  end
 
 end

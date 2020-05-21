@@ -80,7 +80,6 @@ PLATFORMS
 DEPENDENCIES
   bcrypt
   capybara
-  mail
   money
   pg
   pony
