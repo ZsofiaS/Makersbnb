@@ -13,14 +13,11 @@ class SpacedOut < Sinatra::Base
   register Sinatra::Flash
 
   get '/' do
-    if defined?(session[:user])
-      redirect '/users/log-in'
-    else
-      redirect '/spaces'
-    end
+    !session[:user] ? (redirect '/users/log-in') : (redirect '/spaces')
   end
 
   get '/users/new' do
+    session[:user] = nil
     erb :'users/new'
   end
 
@@ -34,7 +31,7 @@ class SpacedOut < Sinatra::Base
   end
 
   get '/users/log-in' do
-    erb :'users/login'
+    session[:user] ? (redirect '/spaces') : (erb :'users/login')
   end
 
   post '/users/log-in' do
