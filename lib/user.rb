@@ -1,12 +1,14 @@
 require_relative 'database_connection'
+require 'bcrypt'
 
 class User
 
-  attr_reader :username, :password, :realname, :email, :id
+  include BCrypt
 
-  def initialize(username, password)
+  attr_reader :username, :realname, :email, :id
+
+  def initialize(username)
     @username = username
-    @password = password
     @realname
     @email
     @id
@@ -15,7 +17,7 @@ class User
 
   def self.create(username, name, email, password)
     if self.username_and_email_test(username, email)
-      DatabaseConnection.query("INSERT INTO users (username, name, email, password) VALUES ('#{username}', '#{name}', '#{email}', '#{password}');")
+      DatabaseConnection.query("INSERT INTO users (username, name, email, password) VALUES ('#{username}', '#{name}', '#{email}', '#{BCrypt::Password.create(password)}');")
       true
     else
       false
@@ -24,13 +26,20 @@ class User
 
   def self.find(id)
     response = DatabaseConnection.query("SELECT * FROM users WHERE id = #{id}")
-    User.new(response[0]['username'], response[0]['password'])
+    user = User.new(response[0]['username'])
+  end
+
+  def self.authenticate(username, password)
+    response = DatabaseConnection.query("SELECT * FROM users WHERE username = '#{username}';")
+    return unless response.any?
+    return unless BCrypt::Password.new(response[0]['password']) == password
+    User.new(response[0]['username'])
   end
 
   private
 
   def get_user_data
-    response = DatabaseConnection.query("SELECT * FROM users WHERE username = '#{@username}' AND password = '#{@password}';")  
+    response = DatabaseConnection.query("SELECT * FROM users WHERE username = '#{@username}';")
     if response.any?
       @id = response[0]['id'].to_i
       @realname = response[0]['name']

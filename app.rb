@@ -14,7 +14,7 @@ class SpacedOut < Sinatra::Base
 
   get '/' do
     if defined?(session[:user])
-      redirect '/users/log-in' 
+      redirect '/users/log-in'
     else
       redirect '/spaces'
     end
@@ -25,8 +25,6 @@ class SpacedOut < Sinatra::Base
   end
 
   post '/users/new' do
-    session[:username] = params[:username]
-    session[:password] = params[:password]
     if User.create(params[:username], params[:name], params[:email], params[:password])
       redirect '/users/log-in'
     else
@@ -40,10 +38,8 @@ class SpacedOut < Sinatra::Base
   end
 
   post '/users/log-in' do
-    'Welcome, test'
-    session[:user] = User.new(params[:username], params[:password])
-    if session[:user].email == nil
-      session[:user] = nil
+    session[:user] = User.authenticate(params[:username], params[:password])
+    if session[:user] == nil
       flash[:notice] = "Username or password is incorrect"
       redirect('/users/log-in')
     else
@@ -51,7 +47,7 @@ class SpacedOut < Sinatra::Base
     end
   end
 
-  get '/signout' do 
+  get '/signout' do
     session[:user] = nil
     redirect '/users/log-in'
   end
@@ -71,25 +67,23 @@ class SpacedOut < Sinatra::Base
       Date.parse(params[:available_to]),
       1 # get session[:user].id
     ).save
-    
+
     redirect('/spaces')
   end
 
   get '/spaces' do
-    @spaces = Space.all 
+    @spaces = Space.all
     erb:'spaces/index'
   end
 
   get '/spaces/:id' do
-    # @space = Space.find(id: params[:id])
     @date_invalid = session[:notice]
     erb :'bookings/booking'
   end
 
   post '/spaces/:id' do
-    # Place holders ----
-    @user_id = 1
-    # -----------------
+    @user = session[:user]
+    @space = Space.find(params[:id])
 
     if (params[:booking_date] == "")
       session[:notice] = "Please enter a valid date"
@@ -97,7 +91,7 @@ class SpacedOut < Sinatra::Base
     end
 
     @booking_date = Date.parse(params[:booking_date])
-    @booking = Booking.create(space_id: params[:id], user_id: @user_id, date: @booking_date)
+    @booking = Booking.create(space_id: @space.id, user_id: @user.id, date: @booking_date)
     redirect '/requests/users/'"#{@booking.user_id}"
   end
 
