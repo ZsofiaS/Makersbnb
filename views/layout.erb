@@ -16,16 +16,22 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse">
-
         <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="/users/new">signup</a>
-          </li>
-          <li class="nav-item active">
-            <a class="nav-link" href="/users/log-in">login</a>
-          </li>
+          <% if session[:user] == nil %>
+            <li class="nav-item active">
+              <a class="nav-link" href="/users/new">signup</a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="/users/log-in">login</a>
+            </li>
+          <% else %>
+            <li class="nav-item active">
+              <a class="nav-link" href="/spaces">spaces</a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="/users/log-in">login</a>
+            </li>
         </ul>
-
       </div>
     </nav>
 
