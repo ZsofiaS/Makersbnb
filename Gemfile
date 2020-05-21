@@ -8,3 +8,4 @@ gem 'simplecov-console', require: false
 gem 'pg'
 gem 'money'
 gem 'sinatra-flash'
+gem 'bcrypt'
