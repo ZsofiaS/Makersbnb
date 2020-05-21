@@ -1,7 +1,8 @@
 <% @spaces.each do |space| %>
-  <%= space.name %>
-  <%= space.description %>
-  <%= space.price_per_night_formatted %>
-  <%= space.available_from.strftime("%d-%m-%Y") %>
-  <%= space.available_to.strftime("%d-%m-%Y") %>
+  <%= space.name %> <br><br>
+  <%= space.description %><br><br>
+  <%= space.available_from.strftime("%d-%m-%Y") %><br><br>
+  <%= space.available_to.strftime("%d-%m-%Y") %><br><br>
+  <img src="<%= space.image_path %>" height="150" width="150"><br><br>
+  <br><br><br><br>
 <% end %>

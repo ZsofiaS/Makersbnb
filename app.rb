@@ -54,12 +54,27 @@ class SpacedOut < Sinatra::Base
   end
 
   post '/spaces/new' do
+    path = ''
+    if params[:image] && params[:image][:filename]
+      filename = params[:image][:filename]
+      file = params[:image][:tempfile]
+      path = "./public/uploads/#{filename}"
+
+      # Write file to disk
+      File.open(path, 'wb') do |f|
+        f.write(file.read)
+      end
+    end
+    path = "uploads/#{filename}"
+
     Space.new(
+      nil,
       params[:name],
       params[:description],
       Money.new(NumberConverter.two_decimal_place_float_to_int(params[:price_per_night].to_f)),
       Date.parse(params[:available_from]),
-      Date.parse(params[:available_to])
+      Date.parse(params[:available_to]),
+      path
     ).save
 
     redirect('/spaces')
@@ -96,5 +111,23 @@ class SpacedOut < Sinatra::Base
 
   get '/requests/spaces/:id' do
     erb :'bookings/spaces'
+  end
+
+  get '/upload' do
+    erb :'upload'
+  end
+
+  post '/upload' do
+      # Check if user uploaded a file
+    if params[:image] && params[:image][:filename]
+      filename = params[:image][:filename]
+      file = params[:image][:tempfile]
+      path = "./public/uploads/#{filename}"
+
+      # Write file to disk
+      File.open(path, 'wb') do |f|
+        f.write(file.read)
+      end
+    end
   end
 end
