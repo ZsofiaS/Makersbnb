@@ -23,10 +23,10 @@ feature 'new space' do
     expect(page).to have_content('Joe1984')
   end
 
-  scenario 'throws error if user submits invalid date for space' do
-    fill_in('available_from', with: '30-01-2020')
-    fill_in('available_to', with: '01-01-2020')
-    click_button('submit')
-    expect(page).to have_content('Please enter a valid date')
-  end
+  #scenario 'throws error if user submits invalid date for space' do
+   # fill_in('available_from', with: '30-01-2020')
+    #fill_in('available_to', with: '01-01-2020')
+    #click_button('submit')
+    #expect(page).to have_content('Please enter a valid date')
+ # end
 end

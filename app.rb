@@ -7,6 +7,7 @@ require './lib/number_converter'
 require './currency_config.rb'
 require './database_connection_setup'
 require 'sinatra/flash'
+require 'date'
 
 class SpacedOut < Sinatra::Base
   use Rack::Session::Pool
@@ -59,18 +60,19 @@ class SpacedOut < Sinatra::Base
   end
 
   post '/spaces/new' do
-    Space.new(
-      nil,
-      params[:name],
-      params[:description],
-      Money.new(NumberConverter.two_decimal_place_float_to_int(params[:price_per_night].to_f)),
-      Date.parse(params[:available_from]),
-      Date.parse(params[:available_to]),
-      session[:user].id
-    ).persist
-    session[:spaces] = Space.all
-    redirect('/spaces')
-  end
+  
+     Space.new(
+       nil,
+       params[:name],
+        params[:description],
+        Money.new(NumberConverter.two_decimal_place_float_to_int(params[:price_per_night].to_f)),
+        Date.parse(params[:available_from]),
+        Date.parse(params[:available_to]),
+        session[:user].id
+     ).persist
+     session[:spaces] = Space.all
+     redirect('/spaces')
+   end
 
   get '/spaces' do
     if session[:spaces].nil?
