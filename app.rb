@@ -3,11 +3,14 @@ require 'money'
 require './lib/space'
 require './lib/booking'
 require './lib/user'
+require './lib/sending_mail'
 require './lib/number_converter'
+require './lib/validate_signup'
 require './currency_config.rb'
 require './database_connection_setup'
 require 'sinatra/flash'
 require 'date'
+require 'pony'
 
 class SpacedOut < Sinatra::Base
   use Rack::Session::Pool
@@ -23,7 +26,13 @@ class SpacedOut < Sinatra::Base
   end
 
   post '/users/new' do
+    if !validate_signup(params)
+      persist_form
+      redirect '/users/new'
+    end
+    p params
     if User.create(params[:username], params[:name], params[:email], params[:password])
+      send_mail(params[:email])
       redirect '/users/log-in'
     else
       flash[:notice] = "Email or username already taken"
