@@ -14,7 +14,7 @@ describe Space do
   end
   describe '#name' do
     it 'should be a string' do
-      expect(subject.name).to be_a_kind_of(String) 
+      expect(subject.name).to be_a_kind_of(String)
     end
 
     it 'has a name set when initialized' do
@@ -26,7 +26,7 @@ describe Space do
     it 'should be a string' do
       expect(subject.description).to be_a_kind_of(String)
     end
-  
+
     it 'has a description when initialized' do
       expect(subject.description).to eq('test description')
     end
@@ -90,7 +90,7 @@ describe Space do
       expect(described_class.find(1)).not_to be nil
     end
 
-    it 'should contaion instances of Space'do 
+    it 'should contaion instances of Space'do
       expect(described_class.find(1)).to be_a_kind_of(Space)
     end
 
@@ -109,7 +109,7 @@ describe Space do
       expect(described_class.find(1).price_per_night.fractional).to eq(1000)
     end
   end
-  
+
   describe '#persist' do
     it 'saves the data with user_id' do
       expect(subject.persist).not_to be nil
@@ -135,7 +135,9 @@ describe Space do
   end
 
   describe '#correct_date?' do
-    it 'returns true if the date is in available range
+    it 'returns true if the date is in available range' do
+      expect(subject.correct_date?).to eq(true)
+    end
   end
 
 end
