@@ -46,4 +46,13 @@ describe Booking do
       expect(booking_spaces[0].id).to eq @subject.id
     end
   end
+
+  describe '.find_by_user' do
+    let(:booking_spaces) { Booking.find_by_user(id: @user.id) }
+
+    it "finds by space id" do
+      expect(booking_spaces[0].id).to eq @subject.id
+    end
+  end
+
 end
