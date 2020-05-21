@@ -13,14 +13,11 @@ class SpacedOut < Sinatra::Base
   register Sinatra::Flash
 
   get '/' do
-    if defined?(session[:user])
-      redirect '/users/log-in'
-    else
-      redirect '/spaces'
-    end
+    !session[:user] ? (redirect '/users/log-in') : (redirect '/spaces')
   end
 
   get '/users/new' do
+    session[:user] = nil
     erb :'users/new'
   end
 
@@ -34,7 +31,7 @@ class SpacedOut < Sinatra::Base
   end
 
   get '/users/log-in' do
-    erb :'users/login'
+    session[:user] ? (redirect '/spaces') : (erb :'users/login')
   end
 
   post '/users/log-in' do
@@ -53,17 +50,23 @@ class SpacedOut < Sinatra::Base
   end
 
   get '/spaces/new' do
+    if session[:user].nil?
+      flash[:notice] = 'not signed in'
+      redirect('/users/log-in')
+    end
     erb :'spaces/new'
   end
 
   post '/spaces/new' do
     Space.new(
+      nil,
       params[:name],
       params[:description],
       Money.new(NumberConverter.two_decimal_place_float_to_int(params[:price_per_night].to_f)),
       Date.parse(params[:available_from]),
-      Date.parse(params[:available_to])
-    ).save
+      Date.parse(params[:available_to]),
+      session[:user].id
+    ).persist
 
     redirect('/spaces')
   end

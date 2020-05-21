@@ -63,5 +63,20 @@ feature 'log-in' do
   end
 end
 
+feature 'main page' do 
+  scenario 'logged in' do 
+    visit '/'
+    fill_in('username', with: 'Joe1984')
+    fill_in('password', with: '12345')
+    click_button('submit')
+    visit '/'
+    expect(page).to have_current_path("/spaces", url: false)
+  end
+  scenario 'not logged in' do 
+    visit '/'
+    expect(page).to have_content('Please log in')
+  end
+end
+
 
 
