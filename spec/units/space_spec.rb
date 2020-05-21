@@ -3,8 +3,8 @@ require 'pg'
 
 describe Space do
   let(:price_per_night) { double(fractional: 1000) }
-  let(:available_from) { double(strftime: '2022-10-10') }
-  let(:available_to) { double(strftime: '2025-11-16') }
+  let(:available_from) { double(strftime: '2031-10-10') }
+  let(:available_to) { double(strftime: '2044-11-16') }
   let(:subject) { described_class.new(1, 'test space title', 'test description', price_per_night, available_from, available_to, 1) }
 
   describe '#id' do
@@ -79,12 +79,6 @@ describe Space do
     end
   end
 
-  describe '#save' do
-    it 'saves data to the spaces table' do
-      expect(subject.save).not_to be_nil
-    end
-  end
-
   describe '#.find' do
     it 'finds data from the spaces table' do
       expect(described_class.find(1)).not_to be nil
@@ -110,9 +104,9 @@ describe Space do
     end
   end
 
-  describe '#persist' do
+  describe '#save' do
     it 'saves the data with user_id' do
-      expect(subject.persist).not_to be nil
+      expect(subject.save).not_to be nil
     end
   end
 
@@ -140,4 +134,21 @@ describe Space do
     end
   end
 
+  describe '.order_by_desc' do
+    it 'sorts desc by price ' do
+      expect(described_class.order_by_desc('price')).not_to be nil
+    end
+  end
+
+  describe '.order_by_asc(value)' do
+    it 'sorts asc by price' do
+      expect(described_class.order_by_asc('price')).not_to be nil
+    end
+  end
+
+  describe '.order_by_dates' do
+    it 'sorts by spesific dates' do
+      expect(described_class.order_by_dates(2031-10-10, 2044-11-16).first['name']).not_to be 'Pluto'
+    end
+  end
 end

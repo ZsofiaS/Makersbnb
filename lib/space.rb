@@ -27,10 +27,6 @@ class Space
   end
 
   def save
-    DatabaseConnection.query("INSERT INTO spaces(name, description, price, available_from, available_to) VALUES('#{@name}', '#{@description}', #{@price_per_night.fractional}, '#{@available_from.strftime('%Y-%m-%d')}', '#{@available_to.strftime('%Y-%m-%d')}') RETURNING id, name, description, price, available_from, available_to;")
-  end
-
-  def persist
     DatabaseConnection.query("INSERT INTO spaces(name, description, price, available_from, available_to, user_id) VALUES('#{@name}', '#{@description}', #{@price_per_night.fractional}, '#{@available_from.strftime('%Y-%m-%d')}', '#{@available_to.strftime('%Y-%m-%d')}','#{user_id}') RETURNING id, name, description, price, available_from, available_to, user_id;")
   end
 
@@ -48,19 +44,23 @@ class Space
     spaces.map { |space| instance(space)}
   end
 
-  def self.instance(space)
-    Space.new(space['id'],
-    space['name'], space['description'],
-    Money.new(space['price']),
-    Date.parse(space['available_from']),
-    Date.parse(space['available_to']),
-    space['user_id'])
-  end
-
-  def self.order_by(value)
+  def self.order_by_desc(value)
     spaces = DatabaseConnection.query("SELECT * FROM spaces ORDER BY #{value} DESC;")
     spaces.map { |space| instance(space)}
   end
 
-  private_class_method :instance
+  def self.order_by_asc(value)
+    spaces = DatabaseConnection.query("SELECT * FROM spaces ORDER BY #{value} ASC;")
+    spaces.map { |space| instance(space)}
+  end
+
+  def self.instance(space)
+    Space.new(space['id'], space['name'], space['description'], Money.new(space['price']), Date.parse(space['available_from']), Date.parse(space['available_to']), space['user_id'])
+  end
+ 
+  private_class_method :instance 
+
+ 
+
+
 end

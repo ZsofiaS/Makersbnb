@@ -68,7 +68,7 @@ class SpacedOut < Sinatra::Base
         Date.parse(params[:available_from]),
         Date.parse(params[:available_to]),
         session[:user].id
-     ).persist
+     ).save
      session[:spaces] = Space.all
      redirect('/spaces')
    end
@@ -85,15 +85,16 @@ class SpacedOut < Sinatra::Base
   post '/spaces' do
 
     case params[:submit]
-      when 'order_by_price'
-        session[:spaces] = Space.order_by('price')
-      when 'available_from'
-        session[:spaces] = Space.order_by('available_from')
-      when 'available_to'
-        session[:spaces] = Space.order_by('available_to')
-      when 'refresh'
+      when 'Price: low to high'
+        session[:spaces] = Space.order_by_asc('price')
+      when 'Price: high to low'
+        session[:spaces] = Space.order_by_desc('price')
+      when 'find dates'
+        session[:spaces] = Space.order_by_dates(params[:checkin_dates], params[:checkout_dates])
+      else
         session[:spaces] = Space.all
-     end
+      end
+
     redirect('/spaces')
   end
 
