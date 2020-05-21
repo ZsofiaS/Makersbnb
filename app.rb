@@ -58,9 +58,6 @@ class SpacedOut < Sinatra::Base
   end
 
   post '/spaces/new' do
-    # TODO: you can't visit this page if you're not logged in
-    p 'id:'
-    p session[:user].id
     Space.new(
       nil,
       params[:name],
@@ -76,8 +73,6 @@ class SpacedOut < Sinatra::Base
 
   get '/spaces' do
     @spaces = Space.all
-    p 'count is: '
-    p @spaces.count
     erb:'spaces/index'
   end
 

@@ -13,7 +13,7 @@ feature 'new space' do
     click_button('submit')
     expect(page).to have_content('test space title')
     expect(page).to have_content('here is a space description')
-    expect(page).to have_content('$120.43')
+    expect(page).to have_content('£120.43')
     expect(page).to have_content('01-01-2020')
     expect(page).to have_content('30-01-2020')
     expect(page).to have_content('Joe1984')
