@@ -61,6 +61,7 @@ class SpacedOut < Sinatra::Base
   end
 
   post '/spaces/new' do
+    # TODO: you can't visit this page if you're not logged in
     Space.new(
       nil,
       params[:name],
@@ -68,7 +69,7 @@ class SpacedOut < Sinatra::Base
       Money.new(NumberConverter.two_decimal_place_float_to_int(params[:price_per_night].to_f)),
       Date.parse(params[:available_from]),
       Date.parse(params[:available_to]),
-      1
+      1 # get session[:user].id
     ).save
     
     redirect('/spaces')
