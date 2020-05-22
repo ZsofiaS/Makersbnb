@@ -48,6 +48,10 @@ class Booking
                status: booking['status'])
   end
 
+  def set_status(status)
+    DatabaseConnection.query("UPDATE bookings SET status = '#{status}' WHERE id = #{@id};")
+  end
+
   private_class_method :instance
 end
 

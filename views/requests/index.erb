@@ -1,13 +1,27 @@
 <h3>Bookings you've made:</h3>
 <% @user_bookings.each_with_index do |booking, index| %>
   <div class="bookings">
-    You booked: <%= Space.find(booking.space_id).name %>
-    For date: <%= booking.date %>.
-    Status: <%= booking.status %>.
+    You booked: <%= Space.find(booking.space_id).name %><br>
+    For date: <%= booking.print_date %>.<br>
+    Status: <%= booking.status %>.<br>
   </div>
+  <br>
+  <br>
 <% end %>
 
-<h3>Bookings you've made:</h3>
+<h3>Bookings you've received:</h3>
 <% @requests_received.each do |request| %>
   You received a request for your space <%= Space.find(request.space_id).name %> from <%= User.find(request.user_id).username %>
+  <% if request.status == 'unconfirmed' %>
+    <form action="/requests" method="post">
+      <input type="hidden" name="status" value="confirmed">
+      <input type="hidden" name="booking_id" value="<%= request.id %>">
+      <input type="submit" value="Confirm" id="booking-confirm-<%= request.id %>">
+    </form>
+    <form action="/requests" method="post">
+      <input type="hidden" name="status" value="rejected">
+      <input type="hidden" name="booking_id" value="<%= request.id %>">
+      <input type="submit" value="Reject" id="booking-reject-<%= request.id %>">
+    </form>
+  <% end %>
 <% end %>
