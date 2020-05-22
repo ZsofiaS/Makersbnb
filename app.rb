@@ -72,7 +72,7 @@ class SpacedOut < Sinatra::Base
   end
 
   post '/spaces/new' do
-    if params[:available_from] > params[:available_to]
+    if params[:available_from] > params[:available_to] || params[:available_from] == "" || params[:available_to] == ""
       flash[:notice] = "Invalid dates"
       redirect ('/spaces/new')
     else
@@ -104,8 +104,7 @@ class SpacedOut < Sinatra::Base
     erb:'spaces/index'
   end
 
-  post '/spaces' do
-
+  post '/spaces' do   
     case params[:submit]
       when 'Price: low to high'
         session[:spaces] = Space.order_by_asc('price')
