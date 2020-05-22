@@ -126,6 +126,7 @@ class SpacedOut < Sinatra::Base
   end
 
   post '/spaces/:id' do
+    # ADD A BOOKING
     @user = session[:user]
     @space = Space.find(params[:id])
 
@@ -150,5 +151,25 @@ class SpacedOut < Sinatra::Base
 
   get '/requests/spaces/:id' do
     erb :'bookings/spaces'
+  end
+
+
+  get '/requests' do
+    @user_bookings = Booking.find_by_user(id: session[:user].id)
+    @booking_spaces = []
+    @user_bookings.each do |booking|
+      @booking_spaces << Space.find(booking.space_id)
+    end
+
+    @user_spaces = Space.find_by_user(session[:user].id)
+    @requests_received = []
+    @user_spaces.each do |space|
+      Booking.find_by_space(id: space.id).each do |request|
+        @requests_received << request
+      end
+    end
+    #p @requests_received[0].user_id
+
+    erb :'/requests/index'
   end
 end

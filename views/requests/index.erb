@@ -1,0 +1,13 @@
+<h3>Bookings you've made:</h3>
+<% @user_bookings.each_with_index do |booking, index| %>
+  <div class="bookings">
+    You booked: <%= Space.find(booking.space_id).name %>
+    For date: <%= booking.date %>.
+    Status: <%= booking.status %>.
+  </div>
+<% end %>
+
+<h3>Bookings you've made:</h3>
+<% @requests_received.each do |request| %>
+  You received a request for your space <%= Space.find(request.space_id).name %> from <%= User.find(request.user_id).username %>
+<% end %>

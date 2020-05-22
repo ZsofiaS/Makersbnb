@@ -3,7 +3,7 @@ require 'date'
 require_relative 'database_connection'
 
 class Booking
-  attr_reader :id, :space_id, :user_id, :status
+  attr_reader :id, :space_id, :user_id, :status, :date
 
   def initialize(id:, space_id:, user_id:, date:, status:)
     @id = id
