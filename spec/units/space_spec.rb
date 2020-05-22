@@ -151,4 +151,10 @@ describe Space do
       expect(described_class.order_by_dates(Date.parse('2031-10-10'), Date.parse('2044-11-16'))).not_to be 'Pluto'
     end
   end 
+
+  #describe '.remove_booked_dates' do
+   # it 'removes booked dates od space form database' do 
+    #  Space.remove_booked_dates(1, '2020-10-10')
+     # expect(described_class.remove_booked_dates).
+  #end
 end

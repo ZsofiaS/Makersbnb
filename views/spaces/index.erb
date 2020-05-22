@@ -7,7 +7,9 @@
   Listed by: <%= space.owner_name %> <br>
 
   <form action="/spaces/<%= space.id %>" method="get">
-    <input type="submit" name="Book Space" value="Book Space">
+    <%if !(space.owner_name == @user.username)%>
+     <input type="submit" name="Book Space" value="Book Space">
+    <%end%>
   </form>
 <% end %>
 

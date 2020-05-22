@@ -7,7 +7,7 @@ class User
 
   attr_reader :username, :realname, :email, :id
 
-  def initialize(username)
+  def initialize(username='guest')
     @username = username
     @realname
     @email
