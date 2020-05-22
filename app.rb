@@ -35,7 +35,6 @@ class SpacedOut < Sinatra::Base
       persist_form
       redirect '/users/new'
     end
-    p params
     if User.create(params[:username], params[:name], params[:email], params[:password])
       send_mail(params[:email])
       redirect '/users/log-in'
@@ -92,8 +91,13 @@ class SpacedOut < Sinatra::Base
    end
 
   get '/spaces' do
+    if session[:user].nil?
+      flash[:notice] = "Please log in"
+      redirect('/users/log-in')
+    end
     if session[:spaces].nil?
       @spaces = Space.all
+      @user = session[:user]
     else
       @spaces = session[:spaces]
     end

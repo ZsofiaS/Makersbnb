@@ -151,4 +151,5 @@ describe Space do
       expect(described_class.order_by_dates(Date.parse('2031-10-10'), Date.parse('2044-11-16'))).not_to be 'Pluto'
     end
   end 
+
 end
