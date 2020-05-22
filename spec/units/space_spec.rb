@@ -148,7 +148,7 @@ describe Space do
 
   describe '.order_by_dates' do
     it 'sorts by spesific dates' do
-      expect(described_class.order_by_dates(2031-10-10, 2044-11-16).first['name']).not_to be 'Pluto'
+      expect(described_class.order_by_dates(Date.parse('2031-10-10'), Date.parse('2044-11-16'))).not_to be 'Pluto'
     end
-  end
+  end 
 end

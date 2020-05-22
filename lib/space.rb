@@ -54,6 +54,12 @@ class Space
     spaces.map { |space| instance(space)}
   end
 
+  def self.order_by_dates(starting_date, ending_date)
+    spaces = DatabaseConnection.query("SELECT * FROM spaces WHERE available_from >='#{starting_date.strftime('%Y-%m-%d')}' AND available_to <= '#{ending_date.strftime('%Y-%m-%d')}';")
+    spaces.map { |space| instance(space)}
+  end
+
+
   def self.instance(space)
     Space.new(space['id'], space['name'], space['description'], Money.new(space['price']), Date.parse(space['available_from']), Date.parse(space['available_to']), space['user_id'])
   end

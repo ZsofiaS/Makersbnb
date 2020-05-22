@@ -68,7 +68,10 @@ class SpacedOut < Sinatra::Base
   end
 
   post '/spaces/new' do
-  
+    if params[:available_from] > params[:available_to]
+      flash[:notice] = "Invalid dates"
+      redirect ('/spaces/new')
+    else
      Space.new(
        nil,
        params[:name],
@@ -80,6 +83,7 @@ class SpacedOut < Sinatra::Base
      ).save
      session[:spaces] = Space.all
      redirect('/spaces')
+    end
    end
 
   get '/spaces' do
@@ -99,7 +103,11 @@ class SpacedOut < Sinatra::Base
       when 'Price: high to low'
         session[:spaces] = Space.order_by_desc('price')
       when 'find dates'
-        session[:spaces] = Space.order_by_dates(params[:checkin_dates], params[:checkout_dates])
+        if ( params[:checkin_date] == "" || params[:checkout_date] == "" )
+          session[:spaces] = Space.all
+        else
+        session[:spaces] = Space.order_by_dates(Date.parse(params[:checkin_date]),Date.parse(params[:checkout_date]))
+        end
       else
         session[:spaces] = Space.all
       end
