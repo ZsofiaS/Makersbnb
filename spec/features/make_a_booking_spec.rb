@@ -31,6 +31,8 @@ feature "Making a booking" do
       click_button 'Request booking'
     end
 
+    #capybara tests to be amended using amended routes
+
     # scenario 'can go back to the space page from requests' do
     #   visit('/requests/users/1')
     #   click_button('Show the space')
