@@ -25,8 +25,8 @@ class User
   end
 
   def self.find(id)
-    response = DatabaseConnection.query("SELECT * FROM users WHERE id = #{id}")
-    user = User.new(response[0]['username'])
+    response = DatabaseConnection.query("SELECT * FROM users WHERE id = #{id};")
+    p user = User.new(response[0]['username'])
   end
 
   def self.authenticate(username, password)
