@@ -1,5 +1,5 @@
 <% @spaces.each do |space| %>
-<div style="margin: 2rem; background-color: #343a40; border: 1px solid white;"class="card space_card" style="width: 18rem;">
+<div style="margin: 2rem auto; min-width: 250px; background-color: #343a40; border: 1px solid white;"class="card space_card" style="width: 18rem;">
   <div class="card-body">
   <h5 class="card-title"> Space Name: <%= space.name %></h5>
   <p class="card-text"><%= space.description %></p>
@@ -17,7 +17,7 @@
   </div>
 <% end %>
 
-<div class="col-md-5 offset-md-3 p-3">
+<div class="col-lg-5" style="margin: 0 auto;">
 <form class='form-signin text-center' action = '/spaces' method = 'post'>
   <div class="form-group">
     <input class='form-control' type = 'submit' name= 'submit' value='Price: low to high'>
