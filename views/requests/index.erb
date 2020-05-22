@@ -1,33 +1,39 @@
-<h3>Bookings you've made:</h3>
+<h3 class="margin-top">Bookings you've made:</h3>
 <% @user_bookings.each_with_index do |booking, index| %>
-  <div class="bookings">
-    You booked: <%= Space.find(booking.space_id).name %><br>
-    For date: <%= booking.print_date %>.<br>
-    Status: <%= booking.status %>.<br>
+  <div class="card space_card" style="margin: 2rem auto; min-width: 250px; background-color: #343a40; border: 1px solid white;"class="card space_card" style="width: 18rem;">
+    <div class="card-body bookings">
+      You booked: <%= Space.find(booking.space_id).name %><br>
+      For date: <%= booking.print_date %>.<br>
+      Status: <%= booking.status %>.<br>
+    </div>
   </div>
   <br>
   <br>
 <% end %>
 
-<h3>Bookings you've received:</h3>
+<h3 >Bookings you've received:</h3>
 <% @requests_received.each do |request| %>
-  <div class="requests">
-    You have received a request for you space: <%= Space.find(request.space_id).name %><br>
-    For date: <%= request.print_date %><br>
-    From user: <%= User.find(request.user_id).username %><br>
-    Status: <%= request.status %>
-    <% if request.status == 'unconfirmed' %>
-      <form action="/requests" method="post">
-        <input type="hidden" name="status" value="confirmed">
-        <input type="hidden" name="booking_id" value="<%= request.id %>">
-        <input type="submit" value="Confirm" id="booking-confirm-<%= request.id %>">
-      </form>
-      <form action="/requests" method="post">
-        <input type="hidden" name="status" value="rejected">
-        <input type="hidden" name="booking_id" value="<%= request.id %>">
-        <input type="submit" value="Reject" id="booking-reject-<%= request.id %>">
-      </form>
-    <% end %>
+<div class="card space_card" style="margin: 2rem auto; min-width: 250px; background-color: #343a40; border: 1px solid white;"class="card space_card" style="width: 18rem;">
+  <div class="card-body requests">
+      You have received a request for you space: <%= Space.find(request.space_id).name %><br>
+      For date: <%= request.print_date %><br>
+      From user: <%= User.find(request.user_id).username %><br>
+      Status: <%= request.status %>
+      <% if request.status == 'unconfirmed' %>
+      <div class="row" style="padding-top:20px">
+        <form class="col" action="/requests" method="post">
+          <input type="hidden" name="status" value="confirmed">
+          <input type="hidden" name="booking_id" value="<%= request.id %>">
+          <input class='form-control' type="submit" value="Confirm" id="booking-confirm-<%= request.id %>">
+        </form>
+        <form class="col" action="/requests" method="post">
+          <input type="hidden" name="status" value="rejected">
+          <input type="hidden" name="booking_id" value="<%= request.id %>">
+          <input class='form-control' type="submit" value="Reject" id="booking-reject-<%= request.id %>">
+        </form>
+      </div>
+      <% end %>
+    </div>
   </div>
   <br>
   <br>

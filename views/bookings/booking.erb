@@ -1,5 +1,5 @@
 
-<h1>Request booking</h1>
+<h1 class="margin-top" >Request booking</h1>
 
 <% if @date_invalid %>
     <div class="notice"><%= @date_invalid %></div>
@@ -13,8 +13,9 @@ Available From: <%= @space.available_from.strftime("%d-%m-%Y") %><br>
 Available To: <%= @space.available_to.strftime("%d-%m-%Y") %><br>
 
 <br>
-
-<form class="" action="/spaces/<%= @space.id %>" method="post">
-<input class="date_selector" type="date" name="booking_date" min="<%= @space.available_from %>" max="<%= @space.available_to %>">
-  <input type="submit" name="Request booking" value="Request booking">
-</form>
+<div class="center">
+  <form action="/spaces/<%= @space.id %>" method="post">
+  <input class="date_selector form-control" style="width: 50%;" type="date" name="booking_date" min="<%= @space.available_from %>" max="<%= @space.available_to %>">
+    <input style="width: 50%; margin-top: 20px;" class="form-control"  type="submit" name="Request booking" value="Request booking">
+  </form>
+</div>
