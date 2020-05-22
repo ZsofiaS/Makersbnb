@@ -4,7 +4,11 @@
   <strong>Price per Night:</strong> <%= space.price_per_night_formatted %><br>
   Available From: <%= space.available_from.strftime("%d-%m-%Y") %><br>
   Available To: <%= space.available_to.strftime("%d-%m-%Y") %><br>
-  Listed by: <%= space.owner_name %> <br><br><br>
+  Listed by: <%= space.owner_name %> <br>
+
+  <form action="/spaces/<%= space.id %>" method="get">
+    <input type="submit" name="Book Space" value="Book Space">
+  </form>
 <% end %>
 
 <div class="col-md-5 offset-md-3 p-3">
