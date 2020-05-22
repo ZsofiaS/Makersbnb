@@ -1,16 +1,20 @@
 <% @spaces.each do |space| %>
- <div> Space Name: <%= space.name %> <br> </div>
-  <%= space.description %><br>
-  <strong>Price per Night:</strong> <%= space.price_per_night_formatted %><br>
-  Available From: <%= space.available_from.strftime("%d-%m-%Y") %><br>
-  Available To: <%= space.available_to.strftime("%d-%m-%Y") %><br>
-  Listed by: <%= space.owner_name %> <br>
+<div style="margin: 2rem; background-color: #343a40; border: 1px solid white;"class="card space_card" style="width: 18rem;">
+  <div class="card-body">
+  <h5 class="card-title"> Space Name: <%= space.name %></h5>
+  <p class="card-text"><%= space.description %></p>
+  <p class="card-text"><strong>Price per Night:</strong> <%= space.price_per_night_formatted %></p>
+  <p class="card-text">Available From: <%= space.available_from.strftime("%d-%m-%Y") %><p>
+  <p class="card-text">Available To: <%= space.available_to.strftime("%d-%m-%Y") %><p>
+  <p class="card-text">Listed by: <%= space.owner_name %> <p>
 
   <form action="/spaces/<%= space.id %>" method="get">
     <%if !(space.owner_name == @user.username)%>
-     <input type="submit" name="Book Space" value="Book Space">
+     <input class='form-control' type="submit" name="Book Space" value="Book Space">
     <%end%>
   </form>
+    </div>
+  </div>
 <% end %>
 
 <div class="col-md-5 offset-md-3 p-3">
