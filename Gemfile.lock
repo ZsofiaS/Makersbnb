@@ -28,6 +28,9 @@ GEM
       ruby2_keywords (~> 0.0.1)
     nokogiri (1.10.9)
       mini_portile2 (~> 2.4.0)
+    orderly (0.1.1)
+      capybara (>= 1.1)
+      rspec (>= 2.14)
     pg (1.2.3)
     pony (1.13.1)
       mail (>= 2.0)
@@ -81,6 +84,7 @@ DEPENDENCIES
   bcrypt
   capybara
   money
+  orderly
   pg
   pony
   rspec
@@ -90,4 +94,4 @@ DEPENDENCIES
   sinatra-flash
 
 BUNDLED WITH
-   2.1.2
+   2.1.4

@@ -9,4 +9,6 @@ gem 'pg'
 gem 'money'
 gem 'sinatra-flash'
 gem 'bcrypt'
+gem 'orderly'
 gem 'pony'
+

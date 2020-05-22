@@ -3,8 +3,8 @@ require 'pg'
 
 describe Space do
   let(:price_per_night) { double(fractional: 1000) }
-  let(:available_from) { double(strftime: '2022-10-10') }
-  let(:available_to) { double(strftime: '2025-11-16') }
+  let(:available_from) { double(strftime: '2031-10-10') }
+  let(:available_to) { double(strftime: '2044-11-16') }
   let(:subject) { described_class.new(1, 'test space title', 'test description', price_per_night, available_from, available_to, 1) }
 
   describe '#id' do
@@ -14,7 +14,7 @@ describe Space do
   end
   describe '#name' do
     it 'should be a string' do
-      expect(subject.name).to be_a_kind_of(String) 
+      expect(subject.name).to be_a_kind_of(String)
     end
 
     it 'has a name set when initialized' do
@@ -26,7 +26,7 @@ describe Space do
     it 'should be a string' do
       expect(subject.description).to be_a_kind_of(String)
     end
-  
+
     it 'has a description when initialized' do
       expect(subject.description).to eq('test description')
     end
@@ -79,18 +79,12 @@ describe Space do
     end
   end
 
-  describe '#save' do
-    it 'saves data to the spaces table' do
-      expect(subject.save).not_to be_nil
-    end
-  end
-
   describe '#.find' do
     it 'finds data from the spaces table' do
       expect(described_class.find(1)).not_to be nil
     end
 
-    it 'should contaion instances of Space'do 
+    it 'should contaion instances of Space'do
       expect(described_class.find(1)).to be_a_kind_of(Space)
     end
 
@@ -109,10 +103,10 @@ describe Space do
       expect(described_class.find(1).price_per_night.fractional).to eq(1000)
     end
   end
-  
-  describe '#persist' do
+
+  describe '#save' do
     it 'saves the data with user_id' do
-      expect(subject.persist).not_to be nil
+      expect(subject.save).not_to be nil
     end
   end
 
@@ -130,8 +124,31 @@ describe Space do
     it 'should return a list of spaces that the user owns' do
       DatabaseConnection.query("INSERT INTO spaces (name, description, price, available_from, available_to, user_id) VALUES ('Pluto', 'BEST PLANET TO DIE', '1000', '2020-10-10', '2020-10-12', 1);")
       DatabaseConnection.query("INSERT INTO spaces (name, description, price, available_from, available_to, user_id) VALUES ('Venus', 'BEST PLANET TO DIVING', '1000', '2020-10-10', '2020-10-12', 1);")
-      expect(described_class.find_by_user(1).count).to eq(3)
+      expect(described_class.find_by_user(1).count).to eq(4)
     end
   end
 
+  describe '#correct_date?' do
+    it 'returns true if the date is in available range' do
+      expect(subject.correct_date?).to eq(true)
+    end
+  end
+
+  describe '.order_by_desc' do
+    it 'sorts desc by price ' do
+      expect(described_class.order_by_desc('price')).not_to be nil
+    end
+  end
+
+  describe '.order_by_asc(value)' do
+    it 'sorts asc by price' do
+      expect(described_class.order_by_asc('price')).not_to be nil
+    end
+  end
+
+  describe '.order_by_dates' do
+    it 'sorts by spesific dates' do
+      expect(described_class.order_by_dates(Date.parse('2031-10-10'), Date.parse('2044-11-16'))).not_to be 'Pluto'
+    end
+  end 
 end

@@ -1,8 +1,19 @@
 <% @spaces.each do |space| %>
-  Space Name: <%= space.name %> <br>
+ <div> Space Name: <%= space.name %> <br> </div>
   <%= space.description %><br>
   <strong>Price per Night:</strong> <%= space.price_per_night_formatted %><br>
   Available From: <%= space.available_from.strftime("%d-%m-%Y") %><br>
   Available To: <%= space.available_to.strftime("%d-%m-%Y") %><br>
   Listed by: <%= space.owner_name %> <br><br><br>
 <% end %>
+
+<form action = '/spaces' method = 'post'>
+  <input type = 'submit' name= 'submit' value='Price: low to high'>
+  <input type = 'submit' name= 'submit' value='Price: high to low'> <br>
+  <strong>Checkin date:</strong> <input class="date_selector" type="date" name="checkin_date" min="2020-01-01" max="2025-12-31">
+  <strong>Checkout date:</strong> <input class="date_selector" type="date" name="checkout_date" min="2020-01-01" max="2025-12-31">
+  <input type="submit" name='submit'value="find dates">
+</form>
+
+
+

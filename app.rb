@@ -10,6 +10,7 @@ require './lib/greeting_generator'
 require './currency_config.rb'
 require './database_connection_setup'
 require 'sinatra/flash'
+require 'date'
 require 'pony'
 
 class SpacedOut < Sinatra::Base
@@ -72,22 +73,51 @@ class SpacedOut < Sinatra::Base
   end
 
   post '/spaces/new' do
-    Space.new(
-      nil,
-      params[:name],
-      params[:description],
-      Money.new(NumberConverter.two_decimal_place_float_to_int(params[:price_per_night].to_f)),
-      Date.parse(params[:available_from]),
-      Date.parse(params[:available_to]),
-      session[:user].id
-    ).persist
-
-    redirect('/spaces')
-  end
+    if params[:available_from] > params[:available_to]
+      flash[:notice] = "Invalid dates"
+      redirect ('/spaces/new')
+    else
+     Space.new(
+       nil,
+       params[:name],
+        params[:description],
+        Money.new(NumberConverter.two_decimal_place_float_to_int(params[:price_per_night].to_f)),
+        Date.parse(params[:available_from]),
+        Date.parse(params[:available_to]),
+        session[:user].id
+     ).save
+     session[:spaces] = Space.all
+     redirect('/spaces')
+    end
+   end
 
   get '/spaces' do
-    @spaces = Space.all
+    if session[:spaces].nil?
+      @spaces = Space.all
+    else
+      @spaces = session[:spaces]
+    end
     erb:'spaces/index'
+  end
+
+  post '/spaces' do
+
+    case params[:submit]
+      when 'Price: low to high'
+        session[:spaces] = Space.order_by_asc('price')
+      when 'Price: high to low'
+        session[:spaces] = Space.order_by_desc('price')
+      when 'find dates'
+        if ( params[:checkin_date] == "" || params[:checkout_date] == "" )
+          session[:spaces] = Space.all
+        else
+        session[:spaces] = Space.order_by_dates(Date.parse(params[:checkin_date]),Date.parse(params[:checkout_date]))
+        end
+      else
+        session[:spaces] = Space.all
+      end
+
+    redirect('/spaces')
   end
 
   get '/spaces/:id' do
