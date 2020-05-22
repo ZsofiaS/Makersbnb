@@ -129,6 +129,8 @@ class SpacedOut < Sinatra::Base
     # ADD A BOOKING
     @user = session[:user]
     @space = Space.find(params[:id])
+    p 'HELLO'
+    p @space.name
 
     if (params[:booking_date] == "")
       session[:notice] = "Please enter a valid date"
