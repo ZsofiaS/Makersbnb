@@ -95,9 +95,9 @@ class SpacedOut < Sinatra::Base
       flash[:notice] = "Please log in"
       redirect('/users/log-in')
     end
+    @user = session[:user]
     if session[:spaces].nil?
       @spaces = Space.all
-      @user = session[:user]
     else
       @spaces = session[:spaces]
     end
