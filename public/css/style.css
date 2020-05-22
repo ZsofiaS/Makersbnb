@@ -4,7 +4,7 @@
   bottom: 0;
   min-width: 100%;
   min-height: 100%;
-  
+
 }
 .content {
   position: fixed;
@@ -13,4 +13,8 @@
   color: #f1f1f1;
   width: 100%;
   padding: 20px;
+}
+.space_card {
+  background-color: #1a1a1a !important;
+  border: 1px solid white !important;
 }
