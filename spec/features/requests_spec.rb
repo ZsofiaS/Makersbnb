@@ -14,8 +14,8 @@ feature 'requests' do
     visit('/requests')
     expect(page).to have_content("You booked: Mars")
     expect(page).to have_content("You booked: Pluto")
-    expect(page).to have_content("You received a request for your space Neptune from Joe1984")
-    expect(page).to have_content("You received a request for your space Jupiter from Joe1984")
+    expect(page).to have_content("You received a request for your space: Neptune")
+    expect(page).to have_content("You received a request for your space: Jupiter")
   end
 
   scenario 'user can see a confirmed request' do
