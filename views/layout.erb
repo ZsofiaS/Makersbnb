@@ -39,7 +39,7 @@
         </ul>
         <% if session[:user] != nil %>
           <span class="navbar-text">
-            Inter-galactic greetings, <%= session[:user].realname %>!
+            <%= @generated_user_greeting %><%= session[:user].realname %>.
          </span>
         <% end %>
       </div>

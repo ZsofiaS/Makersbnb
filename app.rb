@@ -6,6 +6,7 @@ require './lib/user'
 require './lib/sending_mail'
 require './lib/number_converter'
 require './lib/validate_signup'
+require './lib/greeting_generator'
 require './currency_config.rb'
 require './database_connection_setup'
 require 'sinatra/flash'
@@ -14,6 +15,10 @@ require 'pony'
 class SpacedOut < Sinatra::Base
   use Rack::Session::Pool
   register Sinatra::Flash
+
+  before do
+    @generated_user_greeting = GreetingGenerator.greet
+  end
 
   get '/' do
     !session[:user] ? (redirect '/users/log-in') : (redirect '/spaces')
