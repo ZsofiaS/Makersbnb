@@ -3,7 +3,7 @@ require 'date'
 require_relative 'database_connection'
 
 class Booking
-  attr_reader :id, :space_id, :user_id, :status
+  attr_reader :id, :space_id, :user_id, :status, :date
 
   def initialize(id:, space_id:, user_id:, date:, status:)
     @id = id
@@ -46,6 +46,10 @@ class Booking
               user_id: booking['user_id'],
                  date: booking['date'],
                status: booking['status'])
+  end
+
+  def set_status(status)
+    DatabaseConnection.query("UPDATE bookings SET status = '#{status}' WHERE id = #{@id};")
   end
 
   private_class_method :instance

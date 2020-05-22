@@ -125,10 +125,19 @@ class SpacedOut < Sinatra::Base
     @date_invalid = session[:notice]
     @space = Space.find(params[:id])
 
-    erb :'bookings/booking'
+    if session[:user].nil?
+      flash[:notice] = 'Please log in.'
+      redirect('/users/log-in')
+    elsif @space.user_id.to_i == session[:user].id
+      flash[:notice] = "You cannot request a booking for your own space."
+      redirect('/spaces')
+    else
+      erb :'bookings/booking'
+    end
   end
 
   post '/spaces/:id' do
+    # ADD A BOOKING
     @user = session[:user]
     @space = Space.find(params[:id])
 
@@ -139,19 +148,43 @@ class SpacedOut < Sinatra::Base
 
     @booking_date = Date.parse(params[:booking_date])
     @booking = Booking.create(space_id: @space.id, user_id: @user.id, date: @booking_date)
-    redirect '/requests/users/'"#{@booking.user_id}"
+    redirect '/requests'
   end
 
-  get '/requests/users/:id' do
-    @user_booking = Booking.find_by_user(id: params[:id])
-    @space_names = []
-    @user_booking.each do |booking|
-      @space_names << Space.find(booking.space_id).name
+  # get '/requests/users/:id' do
+  #   @user_booking = Booking.find_by_user(id: params[:id])
+  #   @space_names = []
+  #   @user_booking.each do |booking| 
+  #     @space_names << Space.find(booking.space_id).name
+  #   end
+  #   erb :'bookings/requests'
+  # end
+
+  # get '/requests/spaces/:id' do
+  #   erb :'bookings/spaces'
+  # end
+
+
+  get '/requests' do
+    @user_bookings = Booking.find_by_user(id: session[:user].id)
+    @booking_spaces = []
+    @user_bookings.each do |booking|
+      @booking_spaces << Space.find(booking.space_id)
     end
-    erb :'bookings/requests'
+
+    @user_spaces = Space.find_by_user(session[:user].id)
+    @requests_received = []
+    @user_spaces.each do |space|
+      Booking.find_by_space(id: space.id).each do |request|
+        @requests_received << request
+      end
+    end
+    erb :'/requests/index'
   end
 
-  get '/requests/spaces/:id' do
-    erb :'bookings/spaces'
+  post '/requests' do
+    @booking = Booking.find(id: params[:booking_id])
+    @booking.set_status(params[:status])
+    redirect('/requests')
   end
 end
