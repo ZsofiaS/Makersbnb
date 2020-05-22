@@ -122,19 +122,27 @@ class SpacedOut < Sinatra::Base
 
   get '/spaces/:id' do
     @date_invalid = session[:notice]
-    erb :'bookings/booking'
+    @space = Space.find(params[:id])
+
+    if session[:user].nil?
+      flash[:notice] = 'Please log in.'
+      redirect('/users/log-in')
+    elsif @space.user_id.to_i == session[:user].id
+      flash[:notice] = "You cannot request a booking for your own space."
+      redirect('/spaces')
+    else
+      erb :'bookings/booking'
+    end
   end
 
   post '/spaces/:id' do
     # ADD A BOOKING
     @user = session[:user]
     @space = Space.find(params[:id])
-    p 'HELLO'
-    p @space.name
 
     if (params[:booking_date] == "")
       session[:notice] = "Please enter a valid date"
-      redirect '/spaces/1'
+      redirect "/spaces/#{params[:id]}"
     end
 
     @booking_date = Date.parse(params[:booking_date])
@@ -176,5 +184,6 @@ class SpacedOut < Sinatra::Base
   post '/requests' do
     @booking = Booking.find(id: params[:booking_id])
     @booking.set_status(params[:status])
+    redirect('/requests')
   end
 end
