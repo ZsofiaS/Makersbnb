@@ -55,4 +55,18 @@ describe Booking do
     end
   end
 
+  describe '#set_status' do
+    it 'updates a confirmed status' do
+      @subject.set_status('confirmed')
+      updated_subject = described_class.find(id: @subject.id)
+      expect(updated_subject.status).to eq('confirmed')
+    end
+
+    it 'updates a rejected status' do
+      @subject.set_status('rejected')
+      updated_subject = described_class.find(id: @subject.id)
+      expect(updated_subject.status).to eq('rejected')
+    end
+  end
+
 end

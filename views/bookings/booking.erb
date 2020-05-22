@@ -5,7 +5,16 @@
     <div class="notice"><%= @date_invalid %></div>
 <% end %>
 
-<form class="" action="/spaces/1" method="post">
-<input class="date_selector" type="date" name="booking_date" min="2020-01-01" max="2025-12-31">
-  <input type="submit" value="Request booking">
+<p>Name: <%= @space.name %></p>
+<p>Hosted By: <%= @space.owner_name %></p>
+<p>Price per night: <%= @space.price_per_night_formatted %></p>
+
+Available From: <%= @space.available_from.strftime("%d-%m-%Y") %><br>
+Available To: <%= @space.available_to.strftime("%d-%m-%Y") %><br>
+
+<br>
+
+<form class="" action="/spaces/<%= @space.id %>" method="post">
+<input class="date_selector" type="date" name="booking_date" min="<%= @space.available_from %>" max="<%= @space.available_to %>">
+  <input type="submit" name="Request booking" value="Request booking">
 </form>
