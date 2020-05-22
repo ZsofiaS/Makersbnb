@@ -55,7 +55,7 @@ class Space
   end
 
   def self.order_by_dates(starting_date, ending_date)
-    spaces = DatabaseConnection.query("SELECT * FROM spaces WHERE available_from >='#{starting_date.strftime('%Y-%m-%d')}' AND available_to <= '#{ending_date.strftime('%Y-%m-%d')}';")
+    spaces = DatabaseConnection.query("SELECT * FROM spaces WHERE available_from >='#{starting_date.strftime('%Y-%m-%d')}' AND available_to >= '#{ending_date.strftime('%Y-%m-%d')}';")
     spaces.map { |space| instance(space)}
   end
 
