@@ -12,7 +12,7 @@
 <h3>Bookings you've received:</h3>
 <% @requests_received.each do |request| %>
   <div class="requests">
-    You have received a request for you space: <%= Space.find(request.space_id).name %><br>
+    You have received a request for your space: <%= Space.find(request.space_id).name %><br>
     For date: <%= request.print_date %><br>
     From user: <%= User.find(request.user_id).username %><br>
     Status: <%= request.status %>
