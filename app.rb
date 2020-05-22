@@ -109,6 +109,7 @@ class SpacedOut < Sinatra::Base
         session[:spaces] = Space.order_by_desc('price')
       when 'find dates'
         if ( params[:checkin_date] == "" || params[:checkout_date] == "" )
+          flash[:notice] = "Invalid dates"
           session[:spaces] = Space.all
         else
         session[:spaces] = Space.order_by_dates(Date.parse(params[:checkin_date]),Date.parse(params[:checkout_date]))
