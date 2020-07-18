@@ -1,4 +1,5 @@
 require 'sinatra'
+require 'sinatra/activerecord'
 require 'money'
 require './lib/space'
 require './lib/booking'
@@ -158,7 +159,7 @@ class SpacedOut < Sinatra::Base
   # get '/requests/users/:id' do
   #   @user_booking = Booking.find_by_user(id: params[:id])
   #   @space_names = []
-  #   @user_booking.each do |booking| 
+  #   @user_booking.each do |booking|
   #     @space_names << Space.find(booking.space_id).name
   #   end
   #   erb :'bookings/requests'
