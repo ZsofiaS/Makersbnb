@@ -1,6 +1,17 @@
 GEM
   remote: https://rubygems.org/
   specs:
+    activemodel (6.0.3.2)
+      activesupport (= 6.0.3.2)
+    activerecord (6.0.3.2)
+      activemodel (= 6.0.3.2)
+      activesupport (= 6.0.3.2)
+    activesupport (6.0.3.2)
+      concurrent-ruby (~> 1.0, >= 1.0.2)
+      i18n (>= 0.7, < 2)
+      minitest (~> 5.1)
+      tzinfo (~> 1.1)
+      zeitwerk (~> 2.2, >= 2.2.2)
     addressable (2.7.0)
       public_suffix (>= 2.0.2, < 5.0)
     ansi (1.5.0)
@@ -22,6 +33,7 @@ GEM
       mini_mime (>= 0.1.1)
     mini_mime (1.0.2)
     mini_portile2 (2.4.0)
+    minitest (5.14.1)
     money (6.13.7)
       i18n (>= 0.6.4, <= 2)
     mustermann (1.1.1)
@@ -40,6 +52,7 @@ GEM
       rack
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
+    rake (13.0.1)
     regexp_parser (1.7.0)
     rspec (3.9.0)
       rspec-core (~> 3.9.0)
@@ -68,14 +81,21 @@ GEM
       rack (~> 2.0)
       rack-protection (= 2.0.8.1)
       tilt (~> 2.0)
+    sinatra-activerecord (2.0.18)
+      activerecord (>= 4.1)
+      sinatra (>= 1.0)
     sinatra-flash (0.3.0)
       sinatra (>= 1.0.0)
     terminal-table (1.8.0)
       unicode-display_width (~> 1.1, >= 1.1.1)
+    thread_safe (0.3.6)
     tilt (2.0.10)
+    tzinfo (1.2.7)
+      thread_safe (~> 0.1)
     unicode-display_width (1.7.0)
     xpath (3.2.0)
       nokogiri (~> 1.8)
+    zeitwerk (2.4.0)
 
 PLATFORMS
   ruby
@@ -87,10 +107,12 @@ DEPENDENCIES
   orderly
   pg
   pony
+  rake
   rspec
   simplecov
   simplecov-console
   sinatra
+  sinatra-activerecord
   sinatra-flash
 
 BUNDLED WITH

@@ -1,10 +1,10 @@
-# development:
-#   adapter: postgresql
-#   encoding: unicode
-#   database: database_name
-#   pool: 2
-#   username: your_username
-#   password: your_password
+development:
+  adapter: postgresql
+  encoding: unicode
+  database: database_name
+  pool: 2
+  username: <%= ENV['USERNAME'] %>
+  password: <%= ENV['PASSWORD'] %>
 
 production:
   adapter: postgresql
