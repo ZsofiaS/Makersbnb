@@ -1,7 +1,7 @@
 development:
   adapter: postgresql
   encoding: unicode
-  database: database_name
+  database: spaced_out_v2
   pool: 2
   username: <%= ENV['USERNAME'] %>
   password: <%= ENV['PASSWORD'] %>

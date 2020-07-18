@@ -5,13 +5,14 @@ class Spaces < ActiveRecord::Migration[6.0]
     #
     # ALTER TABLE spaces
     # ADD COLUMN user_id INT;
-
-    t.string :name
-    t.string :description
-    t.string :location
-    t.date :available_to
-    t.date :available_from
-    t.integer :price
-    t.integer: :user_id
+    create_table :spaces do |t|
+      t.string :name
+      t.string :description
+      t.string :location
+      t.date :available_to
+      t.date :available_from
+      t.integer :price
+      t.integer :user_id
+    end
   end
 end
