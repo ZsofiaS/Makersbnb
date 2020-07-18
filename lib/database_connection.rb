@@ -2,7 +2,7 @@ require 'pg'
 
 class DatabaseConnection
   def self.setup(dbname)
-    @connection = PG.connect(dbname: dbname)
+    @connection = PG.connect(ENV["HEROKU_POSTGRESQL_SILVER_URL"])
   end
 
   def self.connection
@@ -13,5 +13,5 @@ class DatabaseConnection
     @connection.exec(sql)
   end
 
-  
+
 end
